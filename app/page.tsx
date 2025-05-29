@@ -34,119 +34,119 @@ interface ProgressRevealProps {
 
 const baseDecisions = [
   {
-    title: "Decisión 1: Tu Producto",
-    subtitle: "¿Con qué tecnología arrancás?",
+    title: "Decisión 1: Tu Inversión Inicial",
+    subtitle: "¿Qué estrategia de compra elegís?",
     scenario:
-      "🚀 Tenés $100 para crear tu startup. Elegí qué tipo de producto vas a desarrollar:",
-    icon: "💻",
+      "⚽ Tenés $1000 para arrancar tu emprendimiento de figuritas del Mundial. ¿Cómo invertís tu plata?",
+    icon: "🏪",
     options: [
       {
         id: "A",
-        title: "App Móvil Simple",
-        description: "App básica y funcional",
-        investment: 15,
-        winChance: 85,
-        winGain: 40,
+        title: "Paquetes Comunes",
+        description: "Figuritas regulares. Casi seguro que recuperás la inversión",
+        investment: 150,
+        winChance: 90,
+        winGain: 350,
         riskLevel: "low" as const,
-        icon: "📱",
+        icon: "📦",
       },
       {
         id: "B",
-        title: "Plataforma Web",
-        description: "Sistema web con mayor potencial",
-        investment: 25,
-        winChance: 60,
-        winGain: 75,
+        title: "Mix Equilibrado",
+        description: "Mitad comunes, mitad especiales. Riesgo moderado",
+        investment: 250,
+        winChance: 65,
+        winGain: 650,
         riskLevel: "medium" as const,
-        icon: "🌐",
+        icon: "⚖️",
       },
       {
         id: "C",
-        title: "Tecnología IA",
-        description: "IA disruptiva. Alto riesgo, alto retorno",
-        investment: 35,
-        winChance: 30,
-        winGain: 120,
+        title: "Figuritas Raras",
+        description: "¡A por la dorada de Messi! Pocas chances, pero si sale...",
+        investment: 350,
+        winChance: 25,
+        winGain: 1200,
         riskLevel: "high" as const,
-        icon: "🤖",
+        icon: "⭐",
       },
     ],
   },
   {
-    title: "Decisión 2: Financiamiento",
-    subtitle: "¿Cómo conseguís capital para crecer?",
+    title: "Decisión 2: Estrategia de Venta",
+    subtitle: "¿Dónde vendés tus figuritas?",
     scenario:
-      "💰 Tu producto funciona y necesitás más capital. Elegí tu estrategia de financiamiento:",
+      "💼 Ya tenés tu stock de figuritas. Ahora decidí dónde y cómo las vas a vender:",
     icon: "💰",
     options: [
       {
         id: "A",
-        title: "Capital Propio",
-        description: "Recursos propios. Control total",
-        investment: 15,
-        winChance: 80,
-        winGain: 35,
+        title: "En el Barrio",
+        description: "Venta directa a vecinos y conocidos. Seguro pero limitado",
+        investment: 100,
+        winChance: 85,
+        winGain: 300,
         riskLevel: "low" as const,
-        icon: "💪",
+        icon: "🏘️",
       },
       {
         id: "B",
-        title: "Préstamo Bancario",
-        description: "Capital seguro pero con intereses",
-        investment: 25,
-        winChance: 55,
-        winGain: 65,
+        title: "En la Escuela",
+        description: "Punto estratégico con muchos clientes potenciales",
+        investment: 200,
+        winChance: 60,
+        winGain: 550,
         riskLevel: "medium" as const,
-        icon: "🏦",
+        icon: "🎒",
       },
       {
         id: "C",
-        title: "Inversores de Riesgo",
-        description: "Venture capital. Mucho dinero, menos control",
-        investment: 35,
+        title: "Online y Redes",
+        description: "Instagram, TikTok, MercadoLibre. Alcance máximo",
+        investment: 300,
         winChance: 35,
-        winGain: 100,
+        winGain: 900,
         riskLevel: "high" as const,
-        icon: "💎",
+        icon: "📱",
       },
     ],
   },
   {
-    title: "Decisión 3: Escalamiento",
-    subtitle: "¿Cómo expandís tu startup?",
+    title: "Decisión 3: Expansión del Negocio",
+    subtitle: "¿Cómo hacés crecer tu emprendimiento?",
     scenario:
-      "🚀 Tu startup crece. Decidí tu estrategia de expansión:",
-    icon: "🚀",
+      "🚀 Tu negocio de figuritas va bien. Es hora de expandir. ¿Cuál es tu próximo paso?",
+    icon: "📈",
     options: [
       {
         id: "A",
-        title: "Mercado Local",
-        description: "Enfoque regional. Seguro pero limitado",
-        investment: 20,
-        winChance: 85,
-        winGain: 50,
+        title: "Más Figuritas",
+        description: "Seguir con lo que funciona. Comprar más álbumes",
+        investment: 200,
+        winChance: 80,
+        winGain: 450,
         riskLevel: "low" as const,
-        icon: "🏠",
+        icon: "📚",
       },
       {
         id: "B",
-        title: "Expansión Nacional",
-        description: "Crecimiento a todo el país",
-        investment: 30,
-        winChance: 65,
-        winGain: 85,
+        title: "Otros Coleccionables",
+        description: "Cartas de Pokémon, Yu-Gi-Oh, etc. Diversificar",
+        investment: 350,
+        winChance: 55,
+        winGain: 750,
         riskLevel: "medium" as const,
-        icon: "🗺️",
+        icon: "🎴",
       },
       {
         id: "C",
-        title: "Mercado Global",
-        description: "Expansión internacional. Todo o nada",
-        investment: 40,
-        winChance: 40,
-        winGain: 130,
+        title: "Franquicia con Amigos",
+        description: "Crear una red de vendedores. Riesgo alto, ganancia épica",
+        investment: 500,
+        winChance: 30,
+        winGain: 1400,
         riskLevel: "high" as const,
-        icon: "🌍",
+        icon: "🤝",
       },
     ],
   },
@@ -215,13 +215,13 @@ function ProgressReveal({
   const getPhaseMessage = () => {
     switch (phase) {
       case "analyzing":
-        return "🔍 Analizando variables de mercado..."
+        return "🔍 Analizando demanda del mercado..."
       case "processing":
-        return "⚡ Evaluando viabilidad técnica..."
+        return "⚡ Evaluando estrategia comercial..."
       case "revealing":
         return "📊 Determinando resultado..."
       case "result":
-        return result === "win" ? "✅ INVERSIÓN EXITOSA" : "❌ INVERSIÓN NO EXITOSA"
+        return result === "win" ? "✅ ¡NEGOCIO EXITOSO!" : "❌ NO FUE TU DÍA"
     }
   }
 
@@ -243,8 +243,8 @@ function ProgressReveal({
           {phase === "result" && (
             <span className={result === "win" ? "bg-green-100 text-green-800 px-3 py-1 rounded" : "bg-red-100 text-red-800 px-3 py-1 rounded"}>
               {result === "win"
-                ? `✅ Retorno: $${potentialGain}`
-                : `❌ Pérdida: $${investment}`}
+                ? `✅ Ganaste: $${potentialGain}`
+                : `❌ Perdiste: $${investment}`}
             </span>
           )}
         </div>
@@ -253,8 +253,8 @@ function ProgressReveal({
       <div className="w-full max-w-md mb-8">
         <div className="bg-white rounded-lg border-2 border-gray-200 p-6 shadow-lg">
           <div className="flex items-center justify-between mb-4">
-            <span className="text-sm font-medium text-gray-600">Análisis de Startup</span>
-            <span className="text-blue-500">📊</span>
+            <span className="text-sm font-medium text-gray-600">Análisis de Negocio</span>
+            <span className="text-blue-500">⚽</span>
           </div>
 
           <div className="space-y-4">
@@ -279,7 +279,7 @@ function ProgressReveal({
                 <div className="text-lg font-bold text-green-600">{winChance}%</div>
               </div>
               <div className="text-center p-2 bg-red-50 rounded">
-                <div className="font-semibold text-red-700">Riesgo de Fracaso</div>
+                <div className="font-semibold text-red-700">Riesgo de Pérdida</div>
                 <div className="text-lg font-bold text-red-600">{100 - winChance}%</div>
               </div>
             </div>
@@ -291,7 +291,7 @@ function ProgressReveal({
         <div className="text-center mb-6 w-full max-w-md">
           <div className="flex items-center justify-center gap-3 mb-4">
             <span className={`text-6xl ${result === "win" ? "text-green-500" : "text-red-500"}`}>
-              {result === "win" ? "✅" : "❌"}
+              {result === "win" ? "🎉" : "😞"}
             </span>
           </div>
           <div
@@ -300,19 +300,19 @@ function ProgressReveal({
             }`}
           >
             <h4 className="text-lg font-bold mb-3">
-              {result === "win" ? "Inversión Exitosa" : "Inversión No Exitosa"}
+              {result === "win" ? "¡La pegaste!" : "Esta vez no salió"}
             </h4>
             <p className="text-sm text-gray-600 mb-4">
               {result === "win"
-                ? `Tu estrategia de startup fue exitosa. Retorno neto: $${(potentialGain - investment)}`
-                : `El mercado no respondió favorablemente. Pérdida: $${investment}`}
+                ? `Tu estrategia funcionó bárbaro. Ganancia neta: $${(potentialGain - investment)}`
+                : `No fue tu día, pero así es el negocio. Pérdida: $${investment}`}
             </p>
             {showContinueButton && (
               <button 
                 onClick={onContinue} 
                 className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center gap-2 mx-auto"
               >
-                ➡️ Continuar al Siguiente Paso
+                ➡️ Siguiente Decisión
               </button>
             )}
           </div>
@@ -324,7 +324,7 @@ function ProgressReveal({
 
 export default function Component() {
   const [gameState, setGameState] = useState<GameState>({
-    currentMoney: 100,
+    currentMoney: 1000,
     currentDecision: 0,
     gamePhase: "intro",
     decisions: [],
@@ -349,7 +349,7 @@ export default function Component() {
   }, [gameState.gamePhase, gameState.currentDecision])
 
   useEffect(() => {
-    const savedLeaderboard = localStorage.getItem("startup-tech-leaderboard")
+    const savedLeaderboard = localStorage.getItem("figuritas-mundial-leaderboard")
     if (savedLeaderboard) {
       setLeaderboard(JSON.parse(savedLeaderboard))
     }
@@ -358,15 +358,15 @@ export default function Component() {
   const validateUsername = (name: string): boolean => {
     const trimmedName = name.trim()
     if (trimmedName.length === 0) {
-      setNameError("El nombre no puede estar vacío")
+      setNameError("¡Ponete un nombre, crack!")
       return false
     }
     if (trimmedName.length < 2) {
-      setNameError("El nombre debe tener al menos 2 caracteres")
+      setNameError("Muy cortito el nombre, ¿no?")
       return false
     }
     if (leaderboard.some((entry) => entry.name.toLowerCase() === trimmedName.toLowerCase())) {
-      setNameError("Este nombre ya está registrado. Selecciona otro.")
+      setNameError("Ese nombre ya lo agarró otro. ¡Inventate uno nuevo!")
       return false
     }
     setNameError("")
@@ -386,12 +386,12 @@ export default function Component() {
 
     const updatedLeaderboard = [...leaderboard, newEntry].sort((a, b) => b.finalAmount - a.finalAmount).slice(0, 10)
     setLeaderboard(updatedLeaderboard)
-    localStorage.setItem("startup-tech-leaderboard", JSON.stringify(updatedLeaderboard))
+    localStorage.setItem("figuritas-mundial-leaderboard", JSON.stringify(updatedLeaderboard))
   }
 
   const resetLeaderboard = () => {
     setLeaderboard([])
-    localStorage.removeItem("startup-tech-leaderboard")
+    localStorage.removeItem("figuritas-mundial-leaderboard")
   }
 
   const makeDecision = async (optionIndex: number) => {
@@ -417,10 +417,10 @@ export default function Component() {
       ? gameState.currentMoney - investment + potentialGain 
       : gameState.currentMoney - investment
 
-    // Asegurar que el jugador tenga al menos $15 para la siguiente decisión (costo mínimo)
+    // Asegurar que el jugador tenga al menos $100 para la siguiente decisión
     const isLastDecision = gameState.currentDecision === 2
-    if (!isLastDecision && newMoney < 15) {
-      newMoney = 15 // Dar suficiente dinero para continuar
+    if (!isLastDecision && newMoney < 100) {
+      newMoney = 100 // Dar suficiente dinero para continuar
     }
 
     const newDecisions = [
@@ -453,20 +453,20 @@ export default function Component() {
   }
 
   const getProfile = (amount: number): string => {
-    if (amount >= 300)
-      return "🦄 ¡Crack total! Tomaste riesgos calculados y te la jugaste con inteligencia. Sos un estratega de alto impacto."
-    if (amount >= 200)
-      return "🚀 Muy bien jugado. Estuviste cerca de la cima. Tenés perfil, con algunos ajustes vas a romperla."
-    if (amount >= 150)
-      return "📈 Conservador, pero con potencial. A veces hay que animarse más."
-    if (amount >= 100)
-      return "😐 Mantuviste el capital inicial. No fue tu mejor jugada, pero te llevás el aprendizaje."
-    return "💸 No fue tu startup... pero en el mundo emprendedor se aprende de los errores, y eso también suma."
+    if (amount >= 3000)
+      return "🏆 ¡CRACK TOTAL! Sos el próximo Bill Gates del ITBA. Tomaste riesgos inteligentes y la rompiste."
+    if (amount >= 2000)
+      return "🚀 ¡Muy bien jugado! Tenés mente de emprendedor. Con un poco más de data y análisis vas a ser imparable."
+    if (amount >= 1500)
+      return "📊 Buen trabajo. Jugaste conservador pero efectivo. Los datos te hubieran ayudado a ganar más."
+    if (amount >= 1000)
+      return "😌 Mantuviste tu plata inicial. No está mal, pero podés arriesgar un poco más la próxima."
+    return "💪 Esta vez no salió, ¡pero así se aprende! En los negocios siempre hay una próxima oportunidad."
   }
 
   const resetGame = () => {
     setGameState({
-      currentMoney: 100,
+      currentMoney: 1000,
       currentDecision: 0,
       gamePhase: "intro",
       decisions: [],
@@ -501,79 +501,106 @@ export default function Component() {
       case "medium":
         return "⚡"
       case "high":
-        return "⚠️"
+        return "🎲"
     }
   }
 
   const getRiskLabel = (riskLevel: "low" | "medium" | "high") => {
     switch (riskLevel) {
       case "low":
-        return "BAJO RIESGO"
+        return "SEGURO"
       case "medium":
-        return "RIESGO MODERADO"
+        return "EQUILIBRADO"
       case "high":
-        return "ALTO RIESGO"
+        return "ARRIESGADO"
     }
   }
 
   if (gameState.gamePhase === "intro") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-slate-50 via-blue-50 to-indigo-50 p-4 flex items-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-yellow-50 p-4 flex items-center">
         <div className="max-w-4xl mx-auto w-full">
+          {/* Logo ITBA - Mejorado */}
           <div className="text-center mb-8">
-            <div className="flex justify-center items-center gap-4 mb-6">
-              <span className="text-5xl">💻</span>
-              <div>
-                <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-indigo-600 to-purple-600 bg-clip-text text-transparent">
-                  Dilema Emprendedor
+            <div className="bg-white p-6 rounded-xl shadow-lg inline-block border-2 border-blue-600 hover:shadow-xl transition-shadow">
+              <img
+                src="/ITBA-logo.jpg"
+                alt="Logo ITBA"
+                className="h-16 md:h-20 object-contain mx-auto"
+                style={{ maxWidth: 160 }}
+              />
+            </div>
+            <p className="text-sm text-slate-600 mt-3 font-medium">Instituto Tecnológico de Buenos Aires</p>
+          </div>
+
+          <div className="text-center mb-12">
+            <div className="flex justify-center items-center gap-6 mb-8">
+              <span className="text-6xl animate-bounce">⚽</span>
+              <div className="space-y-3">
+                <h1 className="text-3xl md:text-5xl font-bold bg-gradient-to-r from-blue-600 via-green-600 to-yellow-600 bg-clip-text text-transparent leading-tight">
+                  El Dilema del Emprendedor
                 </h1>
-                <h2 className="text-xl md:text-2xl font-semibold text-slate-700">La Startup del Futuro</h2>
-                <span className="bg-gradient-to-r from-blue-500 to-indigo-500 text-white px-3 py-1 mt-2 text-sm rounded">
-                  Desafío ITBA - ¿Tenés lo que se necesita?
-                </span>
+                <h2 className="text-xl md:text-2xl font-semibold text-slate-700">Figuritas del Mundial</h2>
+                <div className="mt-4">
+                  <span className="bg-gradient-to-r from-blue-500 to-green-500 text-white px-4 py-2 text-sm rounded-full shadow-md">
+                    ¿Tenés pasta de emprendedor?
+                  </span>
+                </div>
               </div>
-              <span className="text-5xl">🚀</span>
+              <span className="text-6xl animate-bounce" style={{animationDelay: '0.2s'}}>🏆</span>
             </div>
           </div>
 
-          <div className="bg-white shadow-2xl border-0 rounded-lg">
-            <div className="text-center bg-gradient-to-r from-slate-100 to-blue-100 rounded-t-lg pb-6 pt-6 px-6">
-              <h2 className="text-xl md:text-2xl text-slate-800 font-bold mb-2">
-                Desafío Emprendedor ITBA
+          <div className="bg-white shadow-2xl border-0 rounded-xl overflow-hidden">
+            <div className="text-center bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 py-8 px-6">
+              <h2 className="text-xl md:text-2xl text-slate-800 font-bold mb-4">
+                ¡Desafío Emprendedor ITBA!
               </h2>
-              <p className="text-base mt-2 text-slate-600">
-                Transformá $100 en una startup exitosa. Tomá decisiones inteligentes, gestioná el riesgo y demostrá si tenés lo necesario para triunfar en el mundo empresarial.
+              <p className="text-base mt-2 text-slate-600 max-w-2xl mx-auto leading-relaxed">
+                ¿Arriesgás o guardás? Tenés $1000 para invertir en figuritas del Mundial. 
+                Tomá decisiones inteligentes y descubrí si tenés instinto emprendedor.
               </p>
             </div>
-            <div className="space-y-6 p-6">
-              <div className="grid grid-cols-3 gap-4 text-center">
-                <div className="p-4 bg-green-50 rounded-xl border border-green-200">
-                  <span className="text-2xl mb-2 block">💰</span>
-                  <p className="text-sm font-medium text-slate-600">Capital Inicial</p>
-                  <p className="text-2xl font-bold text-green-600">$100</p>
+            
+            <div className="space-y-8 p-8">
+              {/* Estadísticas del juego - Mejoradas */}
+              <div className="grid grid-cols-1 md:grid-cols-3 gap-6 text-center">
+                <div className="p-6 bg-green-50 rounded-xl border-2 border-green-200 hover:border-green-300 transition-colors">
+                  <span className="text-3xl mb-3 block">💰</span>
+                  <p className="text-sm font-medium text-slate-600 mb-2">Tu Plata Inicial</p>
+                  <p className="text-3xl font-bold text-green-600">$1000</p>
                 </div>
-                <div className="p-4 bg-blue-50 rounded-xl border border-blue-200">
-                  <span className="text-2xl mb-2 block">🎯</span>
-                  <p className="text-sm font-medium text-slate-600">Objetivo</p>
-                  <p className="text-2xl font-bold text-blue-600">$300</p>
+                <div className="p-6 bg-blue-50 rounded-xl border-2 border-blue-200 hover:border-blue-300 transition-colors">
+                  <span className="text-3xl mb-3 block">🎯</span>
+                  <p className="text-sm font-medium text-slate-600 mb-2">Meta a Alcanzar</p>
+                  <p className="text-3xl font-bold text-blue-600">$3000</p>
                 </div>
-                <div className="p-4 bg-purple-50 rounded-xl border border-purple-200">
-                  <span className="text-2xl mb-2 block">📊</span>
-                  <p className="text-sm font-medium text-slate-600">Decisiones</p>
-                  <p className="text-2xl font-bold text-purple-600">3</p>
+                <div className="p-6 bg-yellow-50 rounded-xl border-2 border-yellow-200 hover:border-yellow-300 transition-colors">
+                  <span className="text-3xl mb-3 block">⚽</span>
+                  <p className="text-sm font-medium text-slate-600 mb-2">Decisiones Clave</p>
+                  <p className="text-3xl font-bold text-yellow-600">3</p>
                 </div>
               </div>
 
-              <div className="text-center">
-                <p className="text-base mb-3">
-                  3 decisiones. $100 de capital inicial. Objetivo: llegar a $300 o más.
-                </p>
-                <p className="text-sm text-slate-600">
-                  Cada decisión tiene diferentes niveles de riesgo y retorno. ¿Podés tomar las decisiones correctas?
-                </p>
+              {/* Descripción del desafío - Mejorada */}
+              <div className="text-center space-y-4 max-w-3xl mx-auto">
+                <div className="bg-slate-50 p-6 rounded-xl border border-slate-200">
+                  <h3 className="text-lg font-semibold text-slate-800 mb-3">🚀 El Desafío</h3>
+                  <p className="text-base mb-4 text-slate-700">
+                    3 decisiones estratégicas. $1000 para invertir. Meta: llegar a $3000 o más.
+                  </p>
+                  <p className="text-sm text-slate-600">
+                    Cada decisión tiene diferentes riesgos y recompensas. ¿Tenés lo que se necesita para ser emprendedor?
+                  </p>
+                </div>
               </div>
 
-              <div className="max-w-md mx-auto">
+              {/* Campo de nombre - Mejorado */}
+              <div className="max-w-md mx-auto space-y-4">
+                <div className="text-center">
+                  <h3 className="text-lg font-semibold text-slate-700 mb-2">👤 ¿Cómo te llamás?</h3>
+                  <p className="text-sm text-slate-500">Ingresá tu nombre para aparecer en el ranking</p>
+                </div>
                 <input
                   type="text"
                   value={playerName}
@@ -581,38 +608,43 @@ export default function Component() {
                     setPlayerName(e.target.value)
                     if (nameError) setNameError("")
                   }}
-                  className={`w-full px-4 py-3 border rounded-lg focus:outline-none focus:ring-2 text-base ${
-                    nameError ? "border-red-300 focus:ring-red-500" : "border-slate-300 focus:ring-blue-500"
+                  className={`w-full px-4 py-3 border-2 rounded-lg focus:outline-none focus:ring-2 text-base transition-colors ${
+                    nameError 
+                      ? "border-red-300 focus:ring-red-500 focus:border-red-500" 
+                      : "border-slate-300 focus:ring-blue-500 focus:border-blue-500"
                   }`}
-                  placeholder="Ingresa tu nombre de emprendedor"
+                  placeholder="Tu nombre aquí..."
                   onKeyPress={(e) => e.key === "Enter" && startGame()}
                 />
                 {nameError && (
-                  <div className="mt-3 border-red-200 bg-red-50 rounded p-3">
-                    <p className="text-red-700 text-sm">⚠️ {nameError}</p>
+                  <div className="mt-3 border-2 border-red-200 bg-red-50 rounded-lg p-4">
+                    <p className="text-red-700 text-sm flex items-center gap-2">
+                      <span>⚠️</span> {nameError}
+                    </p>
                   </div>
                 )}
               </div>
 
-              <div className="flex justify-center gap-3 flex-wrap">
+              {/* Botones - Mejorados */}
+              <div className="flex justify-center gap-4 flex-wrap pt-4">
                 <button
                   onClick={startGame}
                   disabled={!playerName.trim()}
-                  className="bg-blue-600 hover:bg-blue-700 disabled:opacity-50 text-white px-6 py-3 text-base rounded flex items-center gap-2"
+                  className="bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-8 py-3 text-base font-semibold rounded-lg flex items-center gap-2 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
                 >
-                  ▶️ Crear Startup
+                  ⚽ ¡Empezar Negocio!
                 </button>
                 <button
                   onClick={() => setGameState((prev) => ({ ...prev, gamePhase: "tutorial" }))}
-                  className="border border-slate-300 hover:bg-slate-50 px-6 py-3 text-base rounded flex items-center gap-2"
+                  className="border-2 border-slate-300 hover:bg-slate-50 hover:border-slate-400 px-6 py-3 text-base rounded-lg flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
                 >
-                  ℹ️ Cómo Jugar
+                  ❓ Cómo Jugar
                 </button>
                 <button
                   onClick={() => setGameState((prev) => ({ ...prev, gamePhase: "leaderboard" }))}
-                  className="border border-slate-300 hover:bg-slate-50 px-6 py-3 text-base rounded flex items-center gap-2"
+                  className="border-2 border-slate-300 hover:bg-slate-50 hover:border-slate-400 px-6 py-3 text-base rounded-lg flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
                 >
-                  👑 Rankings
+                  🏆 Rankings
                 </button>
               </div>
             </div>
@@ -624,47 +656,47 @@ export default function Component() {
 
   if (gameState.gamePhase === "tutorial") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-indigo-50 p-4 flex items-center">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-4 flex items-center">
         <div className="max-w-3xl mx-auto w-full">
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-slate-800 mb-2">📋 Cómo Jugar</h1>
+            <h1 className="text-3xl font-bold text-slate-800 mb-2">❓ Cómo Jugar</h1>
           </div>
 
           <div className="bg-white shadow-2xl border-0 rounded-lg">
-            <div className="bg-gradient-to-r from-blue-100 to-indigo-100 pb-6 pt-6 px-6 rounded-t-lg">
+            <div className="bg-gradient-to-r from-blue-100 to-green-100 pb-6 pt-6 px-6 rounded-t-lg">
               <h2 className="text-xl font-bold">Reglas del Juego</h2>
             </div>
             <div className="space-y-6 p-6">
               
-              <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
+              <div className="bg-green-50 p-6 rounded-xl border border-green-200">
                 <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-                  🎯 Objetivo
+                  🎯 El Objetivo
                 </h3>
                 <p className="text-base mb-4">
-                  Comienza con $100 y trata de llegar a $300 o más al final del juego.
+                  Empezás con $1000 y tenés que llegar a $3000 o más. ¡Triplicar tu plata es el desafío!
                 </p>
               </div>
 
-              <div className="bg-green-50 p-6 rounded-xl border border-green-200">
+              <div className="bg-blue-50 p-6 rounded-xl border border-blue-200">
                 <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-                  🎮 Cómo Funciona
+                  ⚽ Cómo Funciona
                 </h3>
                 <div className="space-y-3 text-base">
-                  <p>• Tomarás <strong>3 decisiones</strong> para hacer crecer tu startup</p>
-                  <p>• Cada decisión requiere una <strong>inversión de dinero</strong></p>
+                  <p>• Vas a tomar <strong>3 decisiones</strong> sobre tu negocio de figuritas</p>
+                  <p>• Cada decisión requiere que <strong>inviertas dinero</strong></p>
                   <p>• Cada opción tiene una <strong>probabilidad de éxito</strong> diferente</p>
-                  <p>• Si tienes éxito, ganas dinero. Si fallas, pierdes la inversión</p>
+                  <p>• Si la pegás, ganás plata. Si no, la perdés</p>
                 </div>
               </div>
 
-              <div className="bg-orange-50 p-6 rounded-xl border border-orange-200">
+              <div className="bg-yellow-50 p-6 rounded-xl border border-yellow-200">
                 <h3 className="font-semibold text-lg mb-4 flex items-center gap-2">
-                  ⚡ Tipos de Estrategia
+                  🎲 Tipos de Jugadas
                 </h3>
                 <div className="space-y-3 text-base">
-                  <p><span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">🛡️ SEGURA</span> Mayor probabilidad de éxito, menor ganancia</p>
-                  <p><span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">⚡ EQUILIBRADA</span> Riesgo y ganancia moderados</p>
-                  <p><span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">⚠️ ARRIESGADA</span> Menor probabilidad, mayor ganancia</p>
+                  <p><span className="bg-green-100 text-green-800 px-2 py-1 rounded text-sm">🛡️ SEGURO</span> Más chances de ganar, pero ganás menos</p>
+                  <p><span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-sm">⚡ EQUILIBRADO</span> Riesgo y ganancia moderados</p>
+                  <p><span className="bg-red-100 text-red-800 px-2 py-1 rounded text-sm">🎲 ARRIESGADO</span> Pocas chances, pero si sale... ¡la rompés!</p>
                 </div>
               </div>
 
@@ -685,17 +717,18 @@ export default function Component() {
 
   if (gameState.gamePhase === "leaderboard") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-amber-50 to-orange-50 p-4 flex items-center">
+      <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 p-4 flex items-center">
         <div className="max-w-4xl mx-auto w-full">
           <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-slate-800 mb-2">🏆 Hall of Fame Emprendedor</h1>
+            <h1 className="text-3xl font-bold text-slate-800 mb-2">🏆 Hall of Fame</h1>
+            <p className="text-slate-600">Los mejores emprendedores del ITBA</p>
           </div>
 
           <div className="bg-white shadow-2xl border-0 rounded-lg">
-            <div className="bg-gradient-to-r from-amber-100 to-orange-100 pb-6 pt-6 px-6 rounded-t-lg">
+            <div className="bg-gradient-to-r from-yellow-100 to-orange-100 pb-6 pt-6 px-6 rounded-t-lg">
               <div className="flex justify-between items-center">
                 <h2 className="text-xl flex items-center gap-2 font-bold">
-                  👥 Top 10 Startups
+                  👥 Top 10 Emprendedores
                 </h2>
                 <button 
                   onClick={resetLeaderboard}
@@ -709,8 +742,8 @@ export default function Component() {
               {leaderboard.length === 0 ? (
                 <div className="text-center py-12">
                   <span className="text-6xl mb-4 block">🏆</span>
-                  <p className="text-slate-500 text-lg mb-2">Sé el primer emprendedor en el ranking</p>
-                  <p className="text-slate-400 text-sm">Crea tu startup y compite por el primer lugar</p>
+                  <p className="text-slate-500 text-lg mb-2">¡Sé el primero en el ranking!</p>
+                  <p className="text-slate-400 text-sm">Jugá y demostrá que tenés pasta de emprendedor</p>
                 </div>
               ) : (
                 <div className="space-y-4 max-h-96 overflow-y-auto">
@@ -719,7 +752,7 @@ export default function Component() {
                       key={entry.id}
                       className={`flex items-center justify-between p-5 rounded-xl border-2 ${
                         index === 0
-                          ? "bg-gradient-to-r from-amber-100 to-amber-200 border-amber-400"
+                          ? "bg-gradient-to-r from-yellow-100 to-yellow-200 border-yellow-400"
                           : index === 1
                             ? "bg-gradient-to-r from-slate-100 to-slate-200 border-slate-400"
                             : index === 2
@@ -750,13 +783,13 @@ export default function Component() {
                   onClick={() => setGameState((prev) => ({ ...prev, gamePhase: "intro" }))}
                   className="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded hover:bg-slate-50"
                 >
-                  ← Regresar
+                  ← Volver
                 </button>
                 <button 
                   onClick={resetGame} 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center gap-2"
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2"
                 >
-                  🔄 Nueva Startup
+                  🔄 Nuevo Juego
                 </button>
               </div>
             </div>
@@ -775,10 +808,10 @@ export default function Component() {
         <div className="max-w-4xl mx-auto w-full">
           <div className="text-center mb-6">
             <h1 className="text-2xl font-bold text-slate-800 mb-3">
-              {currentDecisionData.icon} Paso {gameState.currentDecision + 1}/3
+              {currentDecisionData.icon} Decisión {gameState.currentDecision + 1}/3
             </h1>
             <span className="border border-slate-300 text-base px-4 py-2 rounded">
-              💰 Capital Disponible: ${gameState.currentMoney}
+              💰 Tu Plata: ${gameState.currentMoney}
             </span>
           </div>
 
@@ -788,7 +821,7 @@ export default function Component() {
                 {selectedOptionData.icon} {selectedOptionData.title}
               </h2>
               <p className="text-base mt-3">
-                {selectedOptionData.winChance}% de probabilidad • Inversión: ${selectedOptionData.investment}
+                {selectedOptionData.winChance}% de chances • Invertiste: ${selectedOptionData.investment}
               </p>
             </div>
             <div>
@@ -810,21 +843,21 @@ export default function Component() {
 
   if (gameState.gamePhase === "result") {
     const profile = getProfile(gameState.currentMoney)
-    const isSuccess = gameState.currentMoney >= 300
+    const isSuccess = gameState.currentMoney >= 3000
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 p-4 flex items-center">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4 flex items-center">
         <div className="max-w-4xl mx-auto w-full">
           <div className="text-center mb-6">
             <h1 className="text-3xl font-bold text-slate-800 mb-2">
-              {isSuccess ? "🎉 Startup Exitosa" : "📊 Resultado Final"}
+              {isSuccess ? "🎉 ¡LA ROMPISTE!" : "📊 Resultado Final"}
             </h1>
           </div>
 
           <div className="bg-white shadow-2xl border-0 rounded-lg">
-            <div className="bg-gradient-to-r from-indigo-100 to-purple-100 pb-6 pt-6 px-6 rounded-t-lg">
+            <div className="bg-gradient-to-r from-green-100 to-blue-100 pb-6 pt-6 px-6 rounded-t-lg">
               <h2 className="text-center text-2xl flex items-center justify-center gap-3 font-bold">
-                Valoración Final:
+                Tu Resultado Final:
                 <span className={`flex items-center gap-2 ${isSuccess ? "text-green-600" : "text-orange-600"}`}>
                   💰 ${gameState.currentMoney}
                 </span>
@@ -835,59 +868,74 @@ export default function Component() {
               <div className="mb-8">
                 <div className="flex justify-between text-base font-semibold mb-3">
                   <span>$0</span>
-                  <span className="text-green-600">Objetivo: $300</span>
-                  <span>$500+</span>
+                  <span className="text-green-600">Meta: $3000</span>
+                  <span>$5000+</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-5">
                   <div 
-                    className="bg-blue-600 h-5 rounded-full transition-all duration-500"
-                    style={{ width: `${Math.min((gameState.currentMoney / 500) * 100, 100)}%` }}
+                    className="bg-green-600 h-5 rounded-full transition-all duration-500"
+                    style={{ width: `${Math.min((gameState.currentMoney / 5000) * 100, 100)}%` }}
                   ></div>
                 </div>
               </div>
 
               <div className="space-y-4 max-h-48 overflow-y-auto mb-8">
-                <h3 className="font-semibold text-lg text-center">📋 Historia de tu Startup:</h3>
+                <h3 className="font-semibold text-lg text-center">📋 Tu Historia Emprendedora:</h3>
                 {gameState.decisions.map((decision, index) => (
                   <div key={index} className="p-4 bg-slate-50 rounded-lg border">
                     <div className="flex justify-between items-center mb-2">
                       <div className="text-base font-medium">
-                        {baseDecisions[index].icon} Paso {index + 1}:{" "}
+                        {baseDecisions[index].icon} Decisión {index + 1}:{" "}
                         {decision.option.split(":")[1]?.trim() || decision.option}
                       </div>
                       <span className={`text-sm px-2 py-1 rounded ${decision.result === "win" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
-                        {decision.result === "win" ? "📈 Exitosa" : "📉 Fallida"}
+                        {decision.result === "win" ? "✅ La pegaste" : "❌ No salió"}
                       </span>
                     </div>
                     <div className="text-sm text-slate-600">
-                      Inversión: ${decision.invested}
+                      Invertiste: ${decision.invested}
                       {decision.result === "win"
-                        ? ` → Retorno: $${decision.gained}`
-                        : " → Pérdida total"}
+                        ? ` → Ganaste: $${decision.gained}`
+                        : " → Perdiste todo"}
                     </div>
                   </div>
                 ))}
               </div>
 
-              <div className="text-center p-6 bg-gradient-to-r from-blue-50 to-indigo-50 rounded-xl border border-blue-200 mb-8">
+              {/* Logo ITBA y mensaje educativo */}
+              <div className="text-center p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl border border-blue-200 mb-8">
+                <div className="bg-white p-3 rounded-lg shadow-md inline-block border-2 border-blue-600 mb-4">
+                  <img
+                    src="/ITBA-logo.jpg"
+                    alt="Logo ITBA"
+                    className="h-12 object-contain mx-auto"
+                    style={{ maxWidth: 90 }}
+                  />
+                </div>
                 <h4 className="font-semibold text-lg mb-3">🎓 En el ITBA formamos emprendedores</h4>
-                <p className="text-sm text-slate-700">
-                  "Cada decisión empresarial implica riesgo, análisis y visión estratégica. Desarrollamos las competencias necesarias para tomar decisiones con impacto real en el mundo de los negocios."
+                <p className="text-sm text-slate-700 mb-3">
+                  En el mundo de los negocios, siempre hay decisiones con distintos niveles de riesgo y recompensa. 
+                  Un buen <strong>Lic. en Analítica Empresarial</strong> o <strong> Lic. en Negocios y Tecnología </strong> 
+                  usa datos y gestiona con tecnología para entender el impacto de cada decisión.
+                </p>
+                <p className="text-sm text-slate-600 italic">
+                  ¡No es magia, es analizar la data para tomar decisiones más inteligentes! 
+                  En el ITBA te preparamos para eso.
                 </p>
               </div>
 
               <div className="flex justify-center gap-4">
                 <button 
                   onClick={resetGame} 
-                  className="bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded flex items-center gap-2"
+                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded flex items-center gap-2"
                 >
-                  🔄 Nueva Startup
+                  🔄 Jugar de Nuevo
                 </button>
                 <button
                   onClick={() => setGameState((prev) => ({ ...prev, gamePhase: "leaderboard" }))}
                   className="border border-slate-300 hover:bg-slate-50 px-6 py-3 rounded flex items-center gap-2"
                 >
-                  👑 Ver Rankings
+                  🏆 Ver Rankings
                 </button>
               </div>
             </div>
@@ -911,7 +959,7 @@ export default function Component() {
               💰 ${gameState.currentMoney}
             </span>
             <span className="border border-slate-300 text-base px-4 py-2 rounded">
-              🎯 Objetivo: $300
+              🎯 Meta: $3000
             </span>
           </div>
 
@@ -974,7 +1022,7 @@ export default function Component() {
                         <div className="flex justify-between items-center">
                           <div className="flex gap-4">
                             <span>💸 Costo: <strong className="text-red-600">${option.investment}</strong></span>
-                            <span>📊 Éxito: <strong>{option.winChance}%</strong></span>
+                            <span>🎯 Chances: <strong>{option.winChance}%</strong></span>
                           </div>
                           <div>
                             <span>💰 Ganancia: <strong className="text-green-600">+${netGain}</strong></span>
@@ -983,7 +1031,7 @@ export default function Component() {
 
                         {!canAfford && (
                           <div className="mt-2 text-red-600 text-sm font-medium">
-                            ⚠️ Capital insuficiente
+                            ⚠️ No te alcanza la plata
                           </div>
                         )}
                       </div>
