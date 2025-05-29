@@ -575,7 +575,7 @@ export default function Component() {
                 src="/ITBA-logo.jpg"
                 alt="Logo ITBA"
                 className="h-8 sm:h-12 lg:h-16 object-contain"
-                style={{ maxWidth: "80px", sm: { maxWidth: "120px" }, lg: { maxWidth: "160px" } }}
+                style={{ maxWidth: "80px" }}
               />
             </div>
           </div>
@@ -631,7 +631,10 @@ export default function Component() {
               {/* Descripción del desafío */}
               <div className="text-center space-y-3 max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto">
                 <div className="bg-slate-50 p-3 sm:p-4 lg:p-6 rounded-xl border border-slate-200">
-                  <p className="text-sm sm:text-base lg:text-lg font-semibold text-slate-800 mb-2">Cada decisión tiene diferentes riesgos y recompensas. ¿Tenés lo que se necesita para ser emprendedor?</p>
+                  <p className="text-sm sm:text-base lg:text-lg font-semibold text-slate-800 mb-2">
+                    Cada decisión tiene diferentes riesgos y recompensas...<br />
+                    ¿Tenés lo que se necesita para ser emprendedor?
+                  </p>
                 </div>
               </div>
 
