@@ -372,7 +372,7 @@ export default function Component() {
       name: playerName.trim(),
       finalAmount,
       profile,
-      date: new Date().toLocaleDateString(),
+      date: new Date().toLocaleString(), // Incluye fecha y hora
     }
 
     const updatedLeaderboard = [...leaderboard, newEntry].sort((a, b) => b.finalAmount - a.finalAmount).slice(0, 10)
@@ -390,8 +390,8 @@ export default function Component() {
     const option = shuffledOptions[optionIndex]
     const investment = Math.min(option.investment, gameState.currentMoney)
     
-    // Calcular ganancia dinámica entre 100% y 250% del costo
-    const multiplier = 1 + (Math.random() * 1.5 + 1) // Entre 2.0 y 3.5 (100% a 250% ganancia)
+    // Calcular ganancia dinámica entre 150% y 300% del costo
+    const multiplier = 2.5 + (Math.random() * 1.5) // Entre 2.5 y 4.0 (150% a 300% ganancia)
     const potentialGain = Math.round(investment * multiplier)
     
     const random = Math.random() * 100
@@ -413,7 +413,7 @@ export default function Component() {
   const onContinueToNext = () => {
     const option = shuffledOptions[selectedOption!]
     const investment = Math.min(option.investment, gameState.currentMoney)
-    const potentialGain = option.calculatedGain || (investment * 2) // Fallback si no se calculó
+    const potentialGain = option.calculatedGain || (investment * 2.5) // Fallback actualizado
 
     let newMoney = revealResult === "win" 
       ? gameState.currentMoney - investment + potentialGain 
@@ -707,7 +707,7 @@ export default function Component() {
                   💰 Ganancias Variables
                 </h3>
                 <p className="text-sm">
-                  Las ganancias varían entre <strong>100% y 250%</strong> del costo de inversión. 
+                  Las ganancias varían entre <strong>150% y 300%</strong> del costo de inversión. 
                   ¡Cada jugada es una sorpresa!
                 </p>
               </div>
@@ -843,7 +843,7 @@ export default function Component() {
                 onComplete={onRevealComplete}
                 winChance={selectedOptionData.winChance}
                 investment={selectedOptionData.investment}
-                potentialGain={selectedOptionData.calculatedGain || (selectedOptionData.investment * 2)}
+                potentialGain={selectedOptionData.calculatedGain || (selectedOptionData.investment * 2.5)}
                 onContinue={onContinueToNext}
               />
             </div>
@@ -1006,9 +1006,9 @@ export default function Component() {
             <div className="grid gap-3">
               {shuffledOptions.map((option, index) => {
                 const canAfford = gameState.currentMoney >= option.investment
-                // Calcular rango de ganancias (100% a 250% del costo)
-                const minGain = Math.round(option.investment * 2) // 100% ganancia = 2x costo
-                const maxGain = Math.round(option.investment * 3.5) // 250% ganancia = 3.5x costo
+                // Calcular rango de ganancias (150% a 300% del costo)
+                const minGain = Math.round(option.investment * 2.5) // 150% ganancia = 2.5x costo
+                const maxGain = Math.round(option.investment * 4) // 300% ganancia = 4x costo
 
                 return (
                   <button
