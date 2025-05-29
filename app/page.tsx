@@ -16,6 +16,7 @@ interface GameState {
 
 interface LeaderboardEntry {
   name: string
+  email: string
   finalAmount: number
   profile: string
   date: string
@@ -115,7 +116,7 @@ const baseDecisions = [
       {
         id: "A",
         title: "Más Figuritas",
-        description: "Seguir con lo que funciona. Comprar más álbumes",
+        description: "Seguir con lo que funciona. Comprar más álbumes del Mundial",
         investment: 200,
         winChance: 80,
         riskLevel: "low" as const,
@@ -322,10 +323,12 @@ export default function Component() {
   })
 
   const [playerName, setPlayerName] = useState("")
+  const [playerEmail, setPlayerEmail] = useState("")
   const [leaderboard, setLeaderboard] = useState<LeaderboardEntry[]>([])
   const [selectedOption, setSelectedOption] = useState<number | null>(null)
   const [revealResult, setRevealResult] = useState<"win" | "lose">("lose")
   const [nameError, setNameError] = useState("")
+  const [emailError, setEmailError] = useState("")
   const [shuffledOptions, setShuffledOptions] = useState<any[]>([])
 
   useEffect(() => {
@@ -340,11 +343,31 @@ export default function Component() {
   }, [gameState.gamePhase, gameState.currentDecision])
 
   useEffect(() => {
-    const savedLeaderboard = localStorage.getItem("figuritas-mundial-leaderboard")
-    if (savedLeaderboard) {
-      setLeaderboard(JSON.parse(savedLeaderboard))
+    try {
+      const savedLeaderboard = localStorage.getItem("figuritas-mundial-leaderboard")
+      if (savedLeaderboard) {
+        const parsedLeaderboard = JSON.parse(savedLeaderboard)
+        // Migrar datos antiguos que no tienen email
+        const migratedLeaderboard = parsedLeaderboard.map((entry: any) => ({
+          ...entry,
+          email: entry.email || "email.no.disponible@legacy.com" // Para entradas antiguas
+        }))
+        setLeaderboard(migratedLeaderboard)
+        // Guardar la versión migrada
+        localStorage.setItem("figuritas-mundial-leaderboard", JSON.stringify(migratedLeaderboard))
+      }
+    } catch (error) {
+      console.error("Error loading leaderboard:", error)
+      // Si hay error, empezar con leaderboard vacío
+      setLeaderboard([])
+      localStorage.removeItem("figuritas-mundial-leaderboard")
     }
   }, [])
+
+  const validateEmail = (email: string): boolean => {
+    const emailRegex = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
+    return emailRegex.test(email)
+  }
 
   const validateUsername = (name: string): boolean => {
     const trimmedName = name.trim()
@@ -364,26 +387,47 @@ export default function Component() {
     return true
   }
 
+  const validateEmailField = (email: string): boolean => {
+    const trimmedEmail = email.trim()
+    if (trimmedEmail.length === 0) {
+      setEmailError("¡Necesitamos tu email!")
+      return false
+    }
+    if (!validateEmail(trimmedEmail)) {
+      setEmailError("El email no tiene un formato válido")
+      return false
+    }
+    // Solo verificar duplicados para emails reales (no legacy)
+    if (leaderboard.some((entry) => 
+      entry.email && 
+      entry.email !== "email.no.disponible@legacy.com" && 
+      entry.email.toLowerCase() === trimmedEmail.toLowerCase()
+    )) {
+      setEmailError("Ese email ya está registrado. ¿Ya jugaste antes?")
+      return false
+    }
+    setEmailError("")
+    return true
+  }
+
   const saveToLeaderboard = (finalAmount: number, profile: string) => {
-    if (!playerName.trim()) return
+    if (!playerName.trim() || !playerEmail.trim()) return
 
     const newEntry: LeaderboardEntry = {
       id: Date.now().toString(),
       name: playerName.trim(),
+      email: playerEmail.trim(),
       finalAmount,
       profile,
       date: new Date().toLocaleString(),
     }
 
-    const updatedLeaderboard = [...leaderboard, newEntry].sort((a, b) => b.finalAmount - a.finalAmount).slice(0, 10)
+    const updatedLeaderboard = [...leaderboard, newEntry].sort((a, b) => b.finalAmount - a.finalAmount)
     setLeaderboard(updatedLeaderboard)
     localStorage.setItem("figuritas-mundial-leaderboard", JSON.stringify(updatedLeaderboard))
   }
 
-  const resetLeaderboard = () => {
-    setLeaderboard([])
-    localStorage.removeItem("figuritas-mundial-leaderboard")
-  }
+
 
   const makeDecision = async (optionIndex: number) => {
     setSelectedOption(optionIndex)
@@ -453,7 +497,7 @@ export default function Component() {
 
   const getProfile = (amount: number): string => {
     if (amount >= 2000)
-      return "🏆 ¡CRACK TOTAL! Sos el próximo Bill Gates del ITBA. Tomaste riesgos inteligentes y la rompiste."
+      return "🏆 ¡Crack total! Tomaste riesgos calculados y te la jugaste con inteligencia. Sos un estratega de alto impacto."
     if (amount >= 1600)
       return "🚀 ¡Muy bien jugado! Tenés mente de emprendedor. Con un poco más de data y análisis vas a ser imparable."
     if (amount >= 1200)
@@ -471,13 +515,18 @@ export default function Component() {
       decisions: [],
     })
     setPlayerName("")
+    setPlayerEmail("")
     setSelectedOption(null)
     setNameError("")
+    setEmailError("")
     setShuffledOptions([])
   }
 
   const startGame = () => {
-    if (validateUsername(playerName)) {
+    const nameValid = validateUsername(playerName)
+    const emailValid = validateEmailField(playerEmail)
+    
+    if (nameValid && emailValid) {
       setGameState((prev) => ({ ...prev, gamePhase: "playing" }))
     }
   }
@@ -538,7 +587,7 @@ export default function Component() {
                 <h1 className="text-lg sm:text-2xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-blue-600 via-green-600 to-yellow-600 bg-clip-text text-transparent leading-tight">
                   El Dilema del Emprendedor
                 </h1>
-                <h2 className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-semibold text-slate-700">Figuritas del Mundial</h2>
+                <h2 className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-semibold text-slate-700">La Carrera por el Mundial</h2>
                 <div className="mt-2">
                   <span className="bg-gradient-to-r from-blue-500 to-green-500 text-white px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full shadow-md">
                     ¿Tenés pasta de emprendedor?
@@ -555,8 +604,7 @@ export default function Component() {
                 ¡Desafío Emprendedor ITBA!
               </h2>
               <p className="text-xs sm:text-sm lg:text-base mt-1 text-slate-600 max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed">
-                ¿Arriesgás o guardás? Tenés $1000 para invertir en figuritas del Mundial. 
-                Tomá decisiones inteligentes y descubrí si tenés instinto emprendedor.
+                ¿Podés transformar $1000 en un negocio digno del Mundial México/Estados Unidos/Canadá 2026? Tomá decisiones, gestioná tu riesgo, y descubrí si sos de los que la rompen como Messi... o se quedan afuera en fase de grupos. ¿Lo tuyo es intuición, estrategia o suerte? ¡Jugá y descubrilo! En el ITBA te preparamos para tomar decisiones con impacto real, como en el mundo emprendedor.
               </p>
             </div>
             
@@ -583,51 +631,76 @@ export default function Component() {
               {/* Descripción del desafío */}
               <div className="text-center space-y-3 max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto">
                 <div className="bg-slate-50 p-3 sm:p-4 lg:p-6 rounded-xl border border-slate-200">
-                  <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-slate-800 mb-2">🚀 El Desafío</h3>
-                  <p className="text-xs sm:text-sm lg:text-base mb-2 text-slate-700">
-                    $1000 para invertir. 3 decisiones estratégicas. Meta: llegar a $2000 o más.
-                  </p>
-                  <p className="text-xs sm:text-sm text-slate-600">
-                    Cada decisión tiene diferentes riesgos y recompensas. ¿Tenés lo que se necesita para ser emprendedor?
-                  </p>
+                  <p className="text-sm sm:text-base lg:text-lg font-semibold text-slate-800 mb-2">Cada decisión tiene diferentes riesgos y recompensas. ¿Tenés lo que se necesita para ser emprendedor?</p>
                 </div>
               </div>
 
-              {/* Campo de nombre */}
-              <div className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto space-y-3">
+              {/* Campos de registro */}
+              <div className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto space-y-4">
                 <div className="text-center">
-                  <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-slate-700 mb-1">👤 ¿Cómo te llamás?</h3>
-                  <p className="text-xs sm:text-sm text-slate-500">Ingresá tu nombre para aparecer en el ranking</p>
+                  <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-slate-700 mb-1">👤 Registrate para jugar</h3>
+                  <p className="text-xs sm:text-sm text-slate-500">Ingresá tus datos para aparecer en el ranking</p>
                 </div>
-                <input
-                  type="text"
-                  value={playerName}
-                  onChange={(e) => {
-                    setPlayerName(e.target.value)
-                    if (nameError) setNameError("")
-                  }}
-                  className={`w-full px-3 py-2 lg:px-4 lg:py-3 border-2 rounded-lg focus:outline-none focus:ring-2 text-sm lg:text-base transition-colors ${
-                    nameError 
-                      ? "border-red-300 focus:ring-red-500 focus:border-red-500" 
-                      : "border-slate-300 focus:ring-blue-500 focus:border-blue-500"
-                  }`}
-                  placeholder="Tu nombre aquí..."
-                  onKeyPress={(e) => e.key === "Enter" && startGame()}
-                />
-                {nameError && (
-                  <div className="mt-2 border-2 border-red-200 bg-red-50 rounded-lg p-3">
-                    <p className="text-red-700 text-xs sm:text-sm flex items-center gap-2">
-                      <span>⚠️</span> {nameError}
-                    </p>
-                  </div>
-                )}
+                
+                {/* Campo de nombre */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Nombre</label>
+                  <input
+                    type="text"
+                    value={playerName}
+                    onChange={(e) => {
+                      setPlayerName(e.target.value)
+                      if (nameError) setNameError("")
+                    }}
+                    className={`w-full px-3 py-2 lg:px-4 lg:py-3 border-2 rounded-lg focus:outline-none focus:ring-2 text-sm lg:text-base transition-colors ${
+                      nameError 
+                        ? "border-red-300 focus:ring-red-500 focus:border-red-500" 
+                        : "border-slate-300 focus:ring-blue-500 focus:border-blue-500"
+                    }`}
+                    placeholder="Tu nombre aquí..."
+                  />
+                  {nameError && (
+                    <div className="mt-2 border-2 border-red-200 bg-red-50 rounded-lg p-2">
+                      <p className="text-red-700 text-xs sm:text-sm flex items-center gap-2">
+                        <span>⚠️</span> {nameError}
+                      </p>
+                    </div>
+                  )}
+                </div>
+
+                {/* Campo de email */}
+                <div>
+                  <label className="block text-sm font-medium text-slate-700 mb-1">Email</label>
+                  <input
+                    type="email"
+                    value={playerEmail}
+                    onChange={(e) => {
+                      setPlayerEmail(e.target.value)
+                      if (emailError) setEmailError("")
+                    }}
+                    className={`w-full px-3 py-2 lg:px-4 lg:py-3 border-2 rounded-lg focus:outline-none focus:ring-2 text-sm lg:text-base transition-colors ${
+                      emailError 
+                        ? "border-red-300 focus:ring-red-500 focus:border-red-500" 
+                        : "border-slate-300 focus:ring-blue-500 focus:border-blue-500"
+                    }`}
+                    placeholder="tu.email@ejemplo.com"
+                    onKeyPress={(e) => e.key === "Enter" && startGame()}
+                  />
+                  {emailError && (
+                    <div className="mt-2 border-2 border-red-200 bg-red-50 rounded-lg p-2">
+                      <p className="text-red-700 text-xs sm:text-sm flex items-center gap-2">
+                        <span>⚠️</span> {emailError}
+                      </p>
+                    </div>
+                  )}
+                </div>
               </div>
 
               {/* Botones */}
               <div className="flex justify-center gap-2 sm:gap-3 flex-wrap pt-2">
                 <button
                   onClick={startGame}
-                  disabled={!playerName.trim()}
+                  disabled={!playerName.trim() || !playerEmail.trim()}
                   className="bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 sm:px-6 py-2 lg:py-3 text-xs sm:text-sm lg:text-base font-semibold rounded-lg flex items-center gap-2 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
                 >
                   ⚽ ¡Empezar Negocio!
@@ -738,7 +811,7 @@ export default function Component() {
   if (gameState.gamePhase === "leaderboard") {
     return (
       <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 p-3 sm:p-4 lg:p-6 flex items-center">
-        <div className="max-w-xl sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full">
+        <div className="max-w-xl sm:max-w-2xl lg:max-w-4xl xl:max-w-6xl mx-auto w-full">
           {/* Logo ITBA */}
           <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
             <div className="bg-white p-2 sm:p-3 lg:p-4 rounded-lg shadow-md border border-blue-600">
@@ -753,22 +826,14 @@ export default function Component() {
           
           <div className="text-center mb-4 mt-16 sm:mt-20 lg:mt-8">
             <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-slate-800 mb-1">🏆 Hall of Fame</h1>
-            <p className="text-slate-600 text-xs sm:text-sm lg:text-base">Los mejores futuros emprendedores del ITBA</p>
+            <p className="text-slate-600 text-xs sm:text-sm lg:text-base">Todos los emprendedores del ITBA ({leaderboard.length} jugadores)</p>
           </div>
 
           <div className="bg-white shadow-2xl border-0 rounded-lg">
             <div className="bg-gradient-to-r from-yellow-100 to-orange-100 py-3 sm:py-4 lg:py-6 px-4 sm:px-6 rounded-t-lg">
-              <div className="flex justify-between items-center">
-                <h2 className="text-base sm:text-lg lg:text-xl flex items-center gap-2 font-bold">
-                  👥 Top 10 Emprendedores
-                </h2>
-                <button 
-                  onClick={resetLeaderboard}
-                  className="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 sm:px-3 sm:py-2 rounded flex items-center gap-1"
-                >
-                  🗑️ Reset
-                </button>
-              </div>
+              <h2 className="text-base sm:text-lg lg:text-xl flex items-center gap-2 font-bold">
+                👥 Ranking Completo
+              </h2>
             </div>
             <div className="p-4 sm:p-5 lg:p-8">
               {leaderboard.length === 0 ? (
@@ -778,11 +843,11 @@ export default function Component() {
                   <p className="text-slate-400 text-xs sm:text-sm lg:text-base">Jugá y demostrá que tenés pasta de emprendedor</p>
                 </div>
               ) : (
-                <div className="space-y-2 sm:space-y-3 max-h-64 sm:max-h-80 lg:max-h-96 overflow-y-auto">
+                <div className="space-y-2 sm:space-y-3 max-h-96 sm:max-h-[500px] lg:max-h-[600px] overflow-y-auto">
                   {leaderboard.map((entry, index) => (
                     <div
                       key={entry.id}
-                      className={`flex items-center justify-between p-2 sm:p-3 lg:p-4 rounded-xl border-2 ${
+                      className={`flex items-center justify-between p-3 sm:p-4 lg:p-5 rounded-xl border-2 ${
                         index === 0
                           ? "bg-gradient-to-r from-yellow-100 to-yellow-200 border-yellow-400"
                           : index === 1
@@ -792,20 +857,25 @@ export default function Component() {
                               : "bg-slate-50 border-slate-200"
                       }`}
                     >
-                      <div className="flex items-center gap-2 sm:gap-3">
-                        <span className={`text-xs sm:text-sm px-2 py-1 rounded ${index < 3 ? "bg-blue-600 text-white" : "bg-slate-400 text-white"}`}>
+                      <div className="flex items-center gap-2 sm:gap-3 flex-1 min-w-0">
+                        <span className={`text-xs sm:text-sm px-2 py-1 rounded flex-shrink-0 ${index < 3 ? "bg-blue-600 text-white" : "bg-slate-400 text-white"}`}>
                           #{index + 1}
                         </span>
-                        <span className="font-semibold text-xs sm:text-sm lg:text-base">{entry.name}</span>
-                        {index === 0 && <span className="text-base sm:text-lg">🥇</span>}
-                        {index === 1 && <span className="text-base sm:text-lg">🥈</span>}
-                        {index === 2 && <span className="text-base sm:text-lg">🥉</span>}
+                        <div className="min-w-0 flex-1">
+                          <div className="flex items-center gap-2 mb-1">
+                            <span className="font-semibold text-xs sm:text-sm lg:text-base truncate">{entry.name}</span>
+                            {index === 0 && <span className="text-base sm:text-lg flex-shrink-0">🥇</span>}
+                            {index === 1 && <span className="text-base sm:text-lg flex-shrink-0">🥈</span>}
+                            {index === 2 && <span className="text-base sm:text-lg flex-shrink-0">🥉</span>}
+                          </div>
+                          <div className="text-xs text-slate-600 truncate">{entry.email}</div>
+                          <div className="text-xs text-slate-500">{entry.date}</div>
+                        </div>
                       </div>
-                      <div className="text-right">
+                      <div className="text-right flex-shrink-0 ml-2">
                         <div className="font-bold text-green-600 text-sm sm:text-base lg:text-lg flex items-center gap-1">
                           💰 ${entry.finalAmount}
                         </div>
-                        <div className="text-xs text-slate-500">{entry.date}</div>
                       </div>
                     </div>
                   ))}
