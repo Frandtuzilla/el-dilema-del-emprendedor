@@ -226,7 +226,7 @@ function ProgressReveal({
   return (
     <div className="flex flex-col items-center py-4">
       <div className="text-center mb-6">
-        <h3 className="text-lg font-bold mb-2">{getPhaseMessage()}</h3>
+        <h3 className="text-base lg:text-lg font-bold mb-2">{getPhaseMessage()}</h3>
 
         <div className="flex gap-2 justify-center text-xs mb-4 flex-wrap">
           <span className="bg-blue-100 text-blue-800 px-2 py-1 rounded">💰 ${investment}</span>
@@ -241,8 +241,8 @@ function ProgressReveal({
         </div>
       </div>
 
-      <div className="w-full max-w-md mb-6">
-        <div className="bg-white rounded-lg border-2 border-gray-200 p-4 shadow-lg">
+      <div className="w-full max-w-sm lg:max-w-md mb-6">
+        <div className="bg-white rounded-lg border-2 border-gray-200 p-3 lg:p-4 shadow-lg">
           <div className="flex items-center justify-between mb-3">
             <span className="text-xs font-medium text-gray-600">Análisis de Negocio</span>
             <span className="text-blue-500">⚽</span>
@@ -279,21 +279,21 @@ function ProgressReveal({
       </div>
 
       {phase === "result" && (
-        <div className="text-center mb-4 w-full max-w-md">
+        <div className="text-center mb-4 w-full max-w-sm lg:max-w-md">
           <div className="flex items-center justify-center gap-2 mb-3">
-            <span className={`text-4xl ${result === "win" ? "text-green-500" : "text-red-500"}`}>
+            <span className={`text-3xl lg:text-4xl ${result === "win" ? "text-green-500" : "text-red-500"}`}>
               {result === "win" ? "🎉" : "😞"}
             </span>
           </div>
           <div
-            className={`p-4 rounded-lg border-2 ${
+            className={`p-3 lg:p-4 rounded-lg border-2 ${
               result === "win" ? "bg-green-50 border-green-300" : "bg-red-50 border-red-300"
             }`}
           >
-            <h4 className="text-base font-bold mb-2">
+            <h4 className="text-sm lg:text-base font-bold mb-2">
               {result === "win" ? "¡La pegaste!" : "Esta vez no salió"}
             </h4>
-            <p className="text-xs text-gray-600 mb-3">
+            <p className="text-xs lg:text-sm text-gray-600 mb-3">
               {result === "win"
                 ? `Tu estrategia funcionó bárbaro. Ganancia neta: ${(potentialGain - investment)}`
                 : `No fue tu día, pero así es el negocio. Pérdida: ${investment}`}
@@ -301,7 +301,7 @@ function ProgressReveal({
             {showContinueButton && (
               <button 
                 onClick={onContinue} 
-                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center gap-2 mx-auto text-sm"
+                className="bg-blue-600 hover:bg-blue-700 text-white px-4 py-2 rounded flex items-center gap-2 mx-auto text-sm lg:text-base"
               >
                 ➡️ Siguiente Decisión
               </button>
@@ -372,7 +372,7 @@ export default function Component() {
       name: playerName.trim(),
       finalAmount,
       profile,
-      date: new Date().toLocaleString(), // Incluye fecha y hora
+      date: new Date().toLocaleString(),
     }
 
     const updatedLeaderboard = [...leaderboard, newEntry].sort((a, b) => b.finalAmount - a.finalAmount).slice(0, 10)
@@ -390,15 +390,13 @@ export default function Component() {
     const option = shuffledOptions[optionIndex]
     const investment = Math.min(option.investment, gameState.currentMoney)
     
-    // Calcular ganancia dinámica entre 150% y 300% del costo
-    const multiplier = 2.5 + (Math.random() * 1.5) // Entre 2.5 y 4.0 (150% a 300% ganancia)
+    const multiplier = 2.5 + (Math.random() * 1.5)
     const potentialGain = Math.round(investment * multiplier)
     
     const random = Math.random() * 100
     const result: "win" | "lose" = random < option.winChance ? "win" : "lose"
     setRevealResult(result)
     
-    // Guardar la ganancia calculada para usar en reveal
     setShuffledOptions(prev => prev.map((opt, idx) => 
       idx === optionIndex ? { ...opt, calculatedGain: potentialGain } : opt
     ))
@@ -413,16 +411,15 @@ export default function Component() {
   const onContinueToNext = () => {
     const option = shuffledOptions[selectedOption!]
     const investment = Math.min(option.investment, gameState.currentMoney)
-    const potentialGain = option.calculatedGain || (investment * 2.5) // Fallback actualizado
+    const potentialGain = option.calculatedGain || (investment * 2.5)
 
     let newMoney = revealResult === "win" 
       ? gameState.currentMoney - investment + potentialGain 
       : gameState.currentMoney - investment
 
-    // Asegurar que el jugador tenga al menos $100 para la siguiente decisión
     const isLastDecision = gameState.currentDecision === 2
     if (!isLastDecision && newMoney < 100) {
-      newMoney = 100 // Dar suficiente dinero para continuar
+      newMoney = 100
     }
 
     const newDecisions = [
@@ -455,11 +452,11 @@ export default function Component() {
   }
 
   const getProfile = (amount: number): string => {
-    if (amount >= 2500)
-      return "🏆 ¡CRACK TOTAL! Sos el próximo Bill Gates del ITBA. Tomaste riesgos inteligentes y la rompiste."
     if (amount >= 2000)
+      return "🏆 ¡CRACK TOTAL! Sos el próximo Bill Gates del ITBA. Tomaste riesgos inteligentes y la rompiste."
+    if (amount >= 1600)
       return "🚀 ¡Muy bien jugado! Tenés mente de emprendedor. Con un poco más de data y análisis vas a ser imparable."
-    if (amount >= 1500)
+    if (amount >= 1200)
       return "📊 Buen trabajo. Jugaste conservador pero efectivo. Los datos te hubieran ayudado a ganar más."
     if (amount >= 1000)
       return "😌 Mantuviste tu plata inicial. No está mal, pero podés arriesgar un poco más la próxima."
@@ -520,87 +517,87 @@ export default function Component() {
 
   if (gameState.gamePhase === "intro") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-yellow-50 p-3 flex items-center">
-        <div className="max-w-4xl mx-auto w-full">
-          {/* Logo ITBA arriba a la izquierda */}
-          <div className="absolute top-4 left-4">
-            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-yellow-50 p-3 sm:p-4 lg:p-6 flex items-center">
+        <div className="max-w-xl sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full">
+          {/* Logo ITBA - Responsivo */}
+          <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
+            <div className="bg-white p-2 sm:p-3 lg:p-4 rounded-lg shadow-md border border-blue-600">
               <img
                 src="/ITBA-logo.jpg"
                 alt="Logo ITBA"
-                className="h-16 object-contain"
-                style={{ maxWidth: 160 }}
+                className="h-8 sm:h-12 lg:h-16 object-contain"
+                style={{ maxWidth: "80px", sm: { maxWidth: "120px" }, lg: { maxWidth: "160px" } }}
               />
             </div>
           </div>
 
-          <div className="text-center mb-8">
-            <div className="flex justify-center items-center gap-4 mb-6">
-              <span className="text-4xl animate-bounce">⚽</span>
-              <div className="space-y-2">
-                <h1 className="text-2xl md:text-4xl font-bold bg-gradient-to-r from-blue-600 via-green-600 to-yellow-600 bg-clip-text text-transparent leading-tight">
+          <div className="text-center mb-6 lg:mb-8 mt-16 sm:mt-20 lg:mt-8">
+            <div className="flex justify-center items-center gap-2 sm:gap-4 mb-4 lg:mb-6">
+              <span className="text-2xl sm:text-3xl lg:text-4xl animate-bounce">⚽</span>
+              <div className="space-y-1 lg:space-y-2">
+                <h1 className="text-lg sm:text-2xl lg:text-4xl xl:text-5xl font-bold bg-gradient-to-r from-blue-600 via-green-600 to-yellow-600 bg-clip-text text-transparent leading-tight">
                   El Dilema del Emprendedor
                 </h1>
-                <h2 className="text-lg md:text-xl font-semibold text-slate-700">Figuritas del Mundial</h2>
+                <h2 className="text-sm sm:text-lg lg:text-xl xl:text-2xl font-semibold text-slate-700">Figuritas del Mundial</h2>
                 <div className="mt-2">
-                  <span className="bg-gradient-to-r from-blue-500 to-green-500 text-white px-3 py-1 text-xs rounded-full shadow-md">
+                  <span className="bg-gradient-to-r from-blue-500 to-green-500 text-white px-2 sm:px-3 py-1 text-xs sm:text-sm rounded-full shadow-md">
                     ¿Tenés pasta de emprendedor?
                   </span>
                 </div>
               </div>
-              <span className="text-4xl animate-bounce" style={{animationDelay: '0.2s'}}>🏆</span>
+              <span className="text-2xl sm:text-3xl lg:text-4xl animate-bounce" style={{animationDelay: '0.2s'}}>🏆</span>
             </div>
           </div>
 
           <div className="bg-white shadow-2xl border-0 rounded-xl overflow-hidden">
-            <div className="text-center bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 py-4 px-6">
-              <h2 className="text-lg md:text-xl text-slate-800 font-bold mb-2">
+            <div className="text-center bg-gradient-to-r from-blue-100 via-green-100 to-yellow-100 py-3 sm:py-4 lg:py-6 px-4 sm:px-6">
+              <h2 className="text-base sm:text-lg lg:text-xl xl:text-2xl text-slate-800 font-bold mb-2">
                 ¡Desafío Emprendedor ITBA!
               </h2>
-              <p className="text-sm mt-1 text-slate-600 max-w-2xl mx-auto leading-relaxed">
+              <p className="text-xs sm:text-sm lg:text-base mt-1 text-slate-600 max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto leading-relaxed">
                 ¿Arriesgás o guardás? Tenés $1000 para invertir en figuritas del Mundial. 
                 Tomá decisiones inteligentes y descubrí si tenés instinto emprendedor.
               </p>
             </div>
             
-            <div className="space-y-6 p-6">
-              {/* Estadísticas del juego - Optimizadas */}
-              <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-center">
-                <div className="p-4 bg-green-50 rounded-xl border-2 border-green-200 hover:border-green-300 transition-colors">
-                  <span className="text-2xl mb-2 block">💰</span>
-                  <p className="text-xs font-medium text-slate-600 mb-1">Tu Plata Inicial</p>
-                  <p className="text-2xl font-bold text-green-600">$1000</p>
+            <div className="space-y-4 sm:space-y-6 p-4 sm:p-6 lg:p-8">
+              {/* Estadísticas del juego - Responsivas */}
+              <div className="grid grid-cols-1 sm:grid-cols-3 gap-3 sm:gap-4 text-center">
+                <div className="p-3 sm:p-4 lg:p-6 bg-green-50 rounded-xl border-2 border-green-200 hover:border-green-300 transition-colors">
+                  <span className="text-xl sm:text-2xl lg:text-3xl mb-2 block">💰</span>
+                  <p className="text-xs sm:text-sm font-medium text-slate-600 mb-1">Tu Plata Inicial</p>
+                  <p className="text-lg sm:text-2xl lg:text-3xl font-bold text-green-600">$1000</p>
                 </div>
-                <div className="p-4 bg-yellow-50 rounded-xl border-2 border-yellow-200 hover:border-yellow-300 transition-colors">
-                  <span className="text-2xl mb-2 block">⚽</span>
-                  <p className="text-xs font-medium text-slate-600 mb-1">Decisiones Clave</p>
-                  <p className="text-2xl font-bold text-yellow-600">3</p>
+                <div className="p-3 sm:p-4 lg:p-6 bg-yellow-50 rounded-xl border-2 border-yellow-200 hover:border-yellow-300 transition-colors">
+                  <span className="text-xl sm:text-2xl lg:text-3xl mb-2 block">⚽</span>
+                  <p className="text-xs sm:text-sm font-medium text-slate-600 mb-1">Decisiones Clave</p>
+                  <p className="text-lg sm:text-2xl lg:text-3xl font-bold text-yellow-600">3</p>
                 </div>
-                <div className="p-4 bg-blue-50 rounded-xl border-2 border-blue-200 hover:border-blue-300 transition-colors">
-                  <span className="text-2xl mb-2 block">🎯</span>
-                  <p className="text-xs font-medium text-slate-600 mb-1">Meta a Alcanzar</p>
-                  <p className="text-2xl font-bold text-blue-600">$2500</p>
+                <div className="p-3 sm:p-4 lg:p-6 bg-blue-50 rounded-xl border-2 border-blue-200 hover:border-blue-300 transition-colors">
+                  <span className="text-xl sm:text-2xl lg:text-3xl mb-2 block">🎯</span>
+                  <p className="text-xs sm:text-sm font-medium text-slate-600 mb-1">Meta a Alcanzar</p>
+                  <p className="text-lg sm:text-2xl lg:text-3xl font-bold text-blue-600">$2000</p>
                 </div>
               </div>
 
-              {/* Descripción del desafío - Optimizada */}
-              <div className="text-center space-y-3 max-w-3xl mx-auto">
-                <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
-                  <h3 className="text-base font-semibold text-slate-800 mb-2">🚀 El Desafío</h3>
-                  <p className="text-sm mb-2 text-slate-700">
-                    $1000 para invertir. 3 decisiones estratégicas. Meta: llegar a $2500 o más.
+              {/* Descripción del desafío */}
+              <div className="text-center space-y-3 max-w-xs sm:max-w-2xl lg:max-w-3xl mx-auto">
+                <div className="bg-slate-50 p-3 sm:p-4 lg:p-6 rounded-xl border border-slate-200">
+                  <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-slate-800 mb-2">🚀 El Desafío</h3>
+                  <p className="text-xs sm:text-sm lg:text-base mb-2 text-slate-700">
+                    $1000 para invertir. 3 decisiones estratégicas. Meta: llegar a $2000 o más.
                   </p>
-                  <p className="text-xs text-slate-600">
+                  <p className="text-xs sm:text-sm text-slate-600">
                     Cada decisión tiene diferentes riesgos y recompensas. ¿Tenés lo que se necesita para ser emprendedor?
                   </p>
                 </div>
               </div>
 
-              {/* Campo de nombre - Optimizado */}
-              <div className="max-w-md mx-auto space-y-3">
+              {/* Campo de nombre */}
+              <div className="max-w-xs sm:max-w-md lg:max-w-lg mx-auto space-y-3">
                 <div className="text-center">
-                  <h3 className="text-base font-semibold text-slate-700 mb-1">👤 ¿Cómo te llamás?</h3>
-                  <p className="text-xs text-slate-500">Ingresá tu nombre para aparecer en el ranking</p>
+                  <h3 className="text-sm sm:text-base lg:text-lg font-semibold text-slate-700 mb-1">👤 ¿Cómo te llamás?</h3>
+                  <p className="text-xs sm:text-sm text-slate-500">Ingresá tu nombre para aparecer en el ranking</p>
                 </div>
                 <input
                   type="text"
@@ -609,7 +606,7 @@ export default function Component() {
                     setPlayerName(e.target.value)
                     if (nameError) setNameError("")
                   }}
-                  className={`w-full px-3 py-2 border-2 rounded-lg focus:outline-none focus:ring-2 text-sm transition-colors ${
+                  className={`w-full px-3 py-2 lg:px-4 lg:py-3 border-2 rounded-lg focus:outline-none focus:ring-2 text-sm lg:text-base transition-colors ${
                     nameError 
                       ? "border-red-300 focus:ring-red-500 focus:border-red-500" 
                       : "border-slate-300 focus:ring-blue-500 focus:border-blue-500"
@@ -619,31 +616,31 @@ export default function Component() {
                 />
                 {nameError && (
                   <div className="mt-2 border-2 border-red-200 bg-red-50 rounded-lg p-3">
-                    <p className="text-red-700 text-xs flex items-center gap-2">
+                    <p className="text-red-700 text-xs sm:text-sm flex items-center gap-2">
                       <span>⚠️</span> {nameError}
                     </p>
                   </div>
                 )}
               </div>
 
-              {/* Botones - Optimizados */}
-              <div className="flex justify-center gap-3 flex-wrap pt-2">
+              {/* Botones */}
+              <div className="flex justify-center gap-2 sm:gap-3 flex-wrap pt-2">
                 <button
                   onClick={startGame}
                   disabled={!playerName.trim()}
-                  className="bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-6 py-2 text-sm font-semibold rounded-lg flex items-center gap-2 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
+                  className="bg-green-600 hover:bg-green-700 disabled:opacity-50 disabled:cursor-not-allowed text-white px-4 sm:px-6 py-2 lg:py-3 text-xs sm:text-sm lg:text-base font-semibold rounded-lg flex items-center gap-2 shadow-lg hover:shadow-xl transition-all transform hover:-translate-y-0.5"
                 >
                   ⚽ ¡Empezar Negocio!
                 </button>
                 <button
                   onClick={() => setGameState((prev) => ({ ...prev, gamePhase: "tutorial" }))}
-                  className="border-2 border-slate-300 hover:bg-slate-50 hover:border-slate-400 px-4 py-2 text-sm rounded-lg flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
+                  className="border-2 border-slate-300 hover:bg-slate-50 hover:border-slate-400 px-3 sm:px-4 py-2 lg:py-3 text-xs sm:text-sm lg:text-base rounded-lg flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
                 >
                   ❓ Cómo Jugar
                 </button>
                 <button
                   onClick={() => setGameState((prev) => ({ ...prev, gamePhase: "leaderboard" }))}
-                  className="border-2 border-slate-300 hover:bg-slate-50 hover:border-slate-400 px-4 py-2 text-sm rounded-lg flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
+                  className="border-2 border-slate-300 hover:bg-slate-50 hover:border-slate-400 px-3 sm:px-4 py-2 lg:py-3 text-xs sm:text-sm lg:text-base rounded-lg flex items-center gap-2 transition-all transform hover:-translate-y-0.5"
                 >
                   🏆 Rankings
                 </button>
@@ -657,44 +654,44 @@ export default function Component() {
 
   if (gameState.gamePhase === "tutorial") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-3 flex items-center">
-        <div className="max-w-3xl mx-auto w-full">
-          {/* Logo ITBA arriba a la izquierda */}
-          <div className="absolute top-4 left-4">
-            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+      <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-3 sm:p-4 lg:p-6 flex items-center">
+        <div className="max-w-xl sm:max-w-2xl lg:max-w-3xl xl:max-w-4xl mx-auto w-full">
+          {/* Logo ITBA */}
+          <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
+            <div className="bg-white p-2 sm:p-3 lg:p-4 rounded-lg shadow-md border border-blue-600">
               <img
                 src="/ITBA-logo.jpg"
                 alt="Logo ITBA"
-                className="h-16 object-contain"
-                style={{ maxWidth: 160 }}
+                className="h-8 sm:h-12 lg:h-16 object-contain"
+                style={{ maxWidth: "80px" }}
               />
             </div>
           </div>
           
-          <div className="text-center mb-4">
-            <h1 className="text-2xl font-bold text-slate-800 mb-2">❓ Cómo Jugar</h1>
+          <div className="text-center mb-4 mt-16 sm:mt-20 lg:mt-8">
+            <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-slate-800 mb-2">❓ Cómo Jugar</h1>
           </div>
 
           <div className="bg-white shadow-2xl border-0 rounded-lg">
-            <div className="bg-gradient-to-r from-blue-100 to-green-100 py-4 px-6 rounded-t-lg">
-              <h2 className="text-lg font-bold">Reglas del Juego</h2>
+            <div className="bg-gradient-to-r from-blue-100 to-green-100 py-3 sm:py-4 lg:py-6 px-4 sm:px-6 rounded-t-lg">
+              <h2 className="text-base sm:text-lg lg:text-xl font-bold">Reglas del Juego</h2>
             </div>
-            <div className="space-y-4 p-5">
+            <div className="space-y-3 sm:space-y-4 lg:space-y-6 p-4 sm:p-5 lg:p-8">
               
-              <div className="bg-green-50 p-4 rounded-xl border border-green-200">
-                <h3 className="font-semibold text-base mb-2 flex items-center gap-2">
+              <div className="bg-green-50 p-3 sm:p-4 lg:p-6 rounded-xl border border-green-200">
+                <h3 className="font-semibold text-sm sm:text-base lg:text-lg mb-2 flex items-center gap-2">
                   🎯 El Objetivo
                 </h3>
-                <p className="text-sm mb-2">
-                  Empezás con $1000 y tenés que llegar a $2500 o más. ¡Más del doble de tu plata es el desafío!
+                <p className="text-xs sm:text-sm lg:text-base mb-2">
+                  Empezás con $1000 y tenés que llegar a $2000 o más. ¡Duplicar tu plata es el desafío!
                 </p>
               </div>
 
-              <div className="bg-blue-50 p-4 rounded-xl border border-blue-200">
-                <h3 className="font-semibold text-base mb-2 flex items-center gap-2">
+              <div className="bg-blue-50 p-3 sm:p-4 lg:p-6 rounded-xl border border-blue-200">
+                <h3 className="font-semibold text-sm sm:text-base lg:text-lg mb-2 flex items-center gap-2">
                   ⚽ Cómo Funciona
                 </h3>
-                <div className="space-y-2 text-sm">
+                <div className="space-y-2 text-xs sm:text-sm lg:text-base">
                   <p>• Vas a tomar <strong>3 decisiones</strong> sobre tu negocio de figuritas</p>
                   <p>• Cada decisión requiere que <strong>inviertas dinero</strong></p>
                   <p>• Cada opción tiene una <strong>probabilidad de éxito</strong> diferente</p>
@@ -702,22 +699,22 @@ export default function Component() {
                 </div>
               </div>
 
-              <div className="bg-yellow-50 p-4 rounded-xl border border-yellow-200">
-                <h3 className="font-semibold text-base mb-2 flex items-center gap-2">
+              <div className="bg-yellow-50 p-3 sm:p-4 lg:p-6 rounded-xl border border-yellow-200">
+                <h3 className="font-semibold text-sm sm:text-base lg:text-lg mb-2 flex items-center gap-2">
                   🎲 Tipos de Jugadas
                 </h3>
-                <div className="space-y-2 text-sm">
+                <div className="space-y-2 text-xs sm:text-sm lg:text-base">
                   <p><span className="bg-green-100 text-green-800 px-2 py-1 rounded text-xs">🛡️ SEGURO</span> Más chances de ganar, pero ganás menos</p>
                   <p><span className="bg-yellow-100 text-yellow-800 px-2 py-1 rounded text-xs">⚡ EQUILIBRADO</span> Riesgo y ganancia moderados</p>
                   <p><span className="bg-red-100 text-red-800 px-2 py-1 rounded text-xs">🎲 ARRIESGADO</span> Pocas chances, pero si sale... ¡la rompés!</p>
                 </div>
               </div>
 
-              <div className="bg-orange-50 p-4 rounded-xl border border-orange-200">
-                <h3 className="font-semibold text-base mb-2 flex items-center gap-2">
+              <div className="bg-orange-50 p-3 sm:p-4 lg:p-6 rounded-xl border border-orange-200">
+                <h3 className="font-semibold text-sm sm:text-base lg:text-lg mb-2 flex items-center gap-2">
                   💰 Ganancias Variables
                 </h3>
-                <p className="text-sm">
+                <p className="text-xs sm:text-sm lg:text-base">
                   Las ganancias varían entre <strong>150% y 300%</strong> del costo de inversión. 
                   ¡Cada jugada es una sorpresa!
                 </p>
@@ -726,7 +723,7 @@ export default function Component() {
               <div className="flex justify-center">
                 <button
                   onClick={() => setGameState((prev) => ({ ...prev, gamePhase: "intro" }))}
-                  className="flex items-center gap-2 px-5 py-2 bg-blue-600 text-white rounded hover:bg-blue-700 text-sm"
+                  className="flex items-center gap-2 px-4 sm:px-5 py-2 sm:py-3 bg-blue-600 text-white rounded hover:bg-blue-700 text-xs sm:text-sm lg:text-base"
                 >
                   ← Volver al Inicio
                 </button>
@@ -740,52 +737,52 @@ export default function Component() {
 
   if (gameState.gamePhase === "leaderboard") {
     return (
-      <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 p-3 flex items-center">
-        <div className="max-w-4xl mx-auto w-full">
-          {/* Logo ITBA arriba a la izquierda */}
-          <div className="absolute top-4 left-4">
-            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+      <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 p-3 sm:p-4 lg:p-6 flex items-center">
+        <div className="max-w-xl sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full">
+          {/* Logo ITBA */}
+          <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
+            <div className="bg-white p-2 sm:p-3 lg:p-4 rounded-lg shadow-md border border-blue-600">
               <img
                 src="/ITBA-logo.jpg"
                 alt="Logo ITBA"
-                className="h-16 object-contain"
-                style={{ maxWidth: 160 }}
+                className="h-8 sm:h-12 lg:h-16 object-contain"
+                style={{ maxWidth: "80px" }}
               />
             </div>
           </div>
           
-          <div className="text-center mb-4">
-            <h1 className="text-2xl font-bold text-slate-800 mb-1">🏆 Hall of Fame</h1>
-            <p className="text-slate-600 text-sm">Los mejores emprendedores del ITBA</p>
+          <div className="text-center mb-4 mt-16 sm:mt-20 lg:mt-8">
+            <h1 className="text-lg sm:text-2xl lg:text-3xl font-bold text-slate-800 mb-1">🏆 Hall of Fame</h1>
+            <p className="text-slate-600 text-xs sm:text-sm lg:text-base">Los mejores futuros emprendedores del ITBA</p>
           </div>
 
           <div className="bg-white shadow-2xl border-0 rounded-lg">
-            <div className="bg-gradient-to-r from-yellow-100 to-orange-100 py-4 px-6 rounded-t-lg">
+            <div className="bg-gradient-to-r from-yellow-100 to-orange-100 py-3 sm:py-4 lg:py-6 px-4 sm:px-6 rounded-t-lg">
               <div className="flex justify-between items-center">
-                <h2 className="text-lg flex items-center gap-2 font-bold">
+                <h2 className="text-base sm:text-lg lg:text-xl flex items-center gap-2 font-bold">
                   👥 Top 10 Emprendedores
                 </h2>
                 <button 
                   onClick={resetLeaderboard}
-                  className="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 rounded flex items-center gap-1"
+                  className="bg-red-600 hover:bg-red-700 text-white text-xs px-2 py-1 sm:px-3 sm:py-2 rounded flex items-center gap-1"
                 >
                   🗑️ Reset
                 </button>
               </div>
             </div>
-            <div className="p-5">
+            <div className="p-4 sm:p-5 lg:p-8">
               {leaderboard.length === 0 ? (
-                <div className="text-center py-8">
-                  <span className="text-4xl mb-3 block">🏆</span>
-                  <p className="text-slate-500 text-base mb-2">¡Sé el primero en el ranking!</p>
-                  <p className="text-slate-400 text-sm">Jugá y demostrá que tenés pasta de emprendedor</p>
+                <div className="text-center py-6 sm:py-8 lg:py-12">
+                  <span className="text-3xl sm:text-4xl lg:text-5xl mb-3 block">🏆</span>
+                  <p className="text-slate-500 text-sm sm:text-base lg:text-lg mb-2">¡Sé el primero en el ranking!</p>
+                  <p className="text-slate-400 text-xs sm:text-sm lg:text-base">Jugá y demostrá que tenés pasta de emprendedor</p>
                 </div>
               ) : (
-                <div className="space-y-3 max-h-64 overflow-y-auto">
+                <div className="space-y-2 sm:space-y-3 max-h-64 sm:max-h-80 lg:max-h-96 overflow-y-auto">
                   {leaderboard.map((entry, index) => (
                     <div
                       key={entry.id}
-                      className={`flex items-center justify-between p-3 rounded-xl border-2 ${
+                      className={`flex items-center justify-between p-2 sm:p-3 lg:p-4 rounded-xl border-2 ${
                         index === 0
                           ? "bg-gradient-to-r from-yellow-100 to-yellow-200 border-yellow-400"
                           : index === 1
@@ -795,17 +792,17 @@ export default function Component() {
                               : "bg-slate-50 border-slate-200"
                       }`}
                     >
-                      <div className="flex items-center gap-3">
-                        <span className={`text-sm px-2 py-1 rounded ${index < 3 ? "bg-blue-600 text-white" : "bg-slate-400 text-white"}`}>
+                      <div className="flex items-center gap-2 sm:gap-3">
+                        <span className={`text-xs sm:text-sm px-2 py-1 rounded ${index < 3 ? "bg-blue-600 text-white" : "bg-slate-400 text-white"}`}>
                           #{index + 1}
                         </span>
-                        <span className="font-semibold text-sm">{entry.name}</span>
-                        {index === 0 && <span className="text-lg">🥇</span>}
-                        {index === 1 && <span className="text-lg">🥈</span>}
-                        {index === 2 && <span className="text-lg">🥉</span>}
+                        <span className="font-semibold text-xs sm:text-sm lg:text-base">{entry.name}</span>
+                        {index === 0 && <span className="text-base sm:text-lg">🥇</span>}
+                        {index === 1 && <span className="text-base sm:text-lg">🥈</span>}
+                        {index === 2 && <span className="text-base sm:text-lg">🥉</span>}
                       </div>
                       <div className="text-right">
-                        <div className="font-bold text-green-600 text-base flex items-center gap-1">
+                        <div className="font-bold text-green-600 text-sm sm:text-base lg:text-lg flex items-center gap-1">
                           💰 ${entry.finalAmount}
                         </div>
                         <div className="text-xs text-slate-500">{entry.date}</div>
@@ -815,16 +812,16 @@ export default function Component() {
                 </div>
               )}
 
-              <div className="flex justify-center gap-3 mt-6">
+              <div className="flex justify-center gap-2 sm:gap-3 mt-4 sm:mt-6">
                 <button 
                   onClick={() => setGameState((prev) => ({ ...prev, gamePhase: "intro" }))}
-                  className="flex items-center gap-2 px-4 py-2 border border-slate-300 rounded hover:bg-slate-50 text-sm"
+                  className="flex items-center gap-2 px-3 sm:px-4 py-2 sm:py-3 border border-slate-300 rounded hover:bg-slate-50 text-xs sm:text-sm lg:text-base"
                 >
                   ← Volver
                 </button>
                 <button 
                   onClick={resetGame} 
-                  className="bg-green-600 hover:bg-green-700 text-white px-4 py-2 rounded flex items-center gap-2 text-sm"
+                  className="bg-green-600 hover:bg-green-700 text-white px-3 sm:px-4 py-2 sm:py-3 rounded flex items-center gap-2 text-xs sm:text-sm lg:text-base"
                 >
                   🔄 Nuevo Juego
                 </button>
@@ -841,35 +838,35 @@ export default function Component() {
     const selectedOptionData = shuffledOptions[selectedOption!]
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 p-4 flex items-center">
-        <div className="max-w-4xl mx-auto w-full">
-          {/* Logo ITBA arriba a la izquierda */}
-          <div className="absolute top-4 left-4">
-            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+      <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 p-3 sm:p-4 lg:p-6 flex items-center">
+        <div className="max-w-xl sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full">
+          {/* Logo ITBA */}
+          <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
+            <div className="bg-white p-2 sm:p-3 lg:p-4 rounded-lg shadow-md border border-blue-600">
               <img
                 src="/ITBA-logo.jpg"
                 alt="Logo ITBA"
-                className="h-16 object-contain"
-                style={{ maxWidth: 160 }}
+                className="h-8 sm:h-12 lg:h-16 object-contain"
+                style={{ maxWidth: "80px" }}
               />
             </div>
           </div>
           
-          <div className="text-center mb-4">
-            <h1 className="text-xl font-bold text-slate-800 mb-2">
+          <div className="text-center mb-4 mt-16 sm:mt-20 lg:mt-8">
+            <h1 className="text-base sm:text-xl lg:text-2xl font-bold text-slate-800 mb-2">
               {currentDecisionData.icon} Decisión {gameState.currentDecision + 1}/3
             </h1>
-            <span className="border border-slate-300 text-sm px-3 py-1 rounded">
+            <span className="border border-slate-300 text-xs sm:text-sm lg:text-base px-3 py-1 rounded">
               💰 Tu Plata: ${gameState.currentMoney}
             </span>
           </div>
 
           <div className="bg-white shadow-2xl border-0 rounded-lg">
-            <div className="text-center bg-gradient-to-r from-indigo-100 to-purple-100 py-4 px-6 rounded-t-lg">
-              <h2 className="text-base font-bold">
+            <div className="text-center bg-gradient-to-r from-indigo-100 to-purple-100 py-3 sm:py-4 lg:py-6 px-4 sm:px-6 rounded-t-lg">
+              <h2 className="text-sm sm:text-base lg:text-lg font-bold">
                 {selectedOptionData.icon} {selectedOptionData.title}
               </h2>
-              <p className="text-sm mt-2">
+              <p className="text-xs sm:text-sm lg:text-base mt-2">
                 {selectedOptionData.winChance}% de chances • Invertiste: ${selectedOptionData.investment}
               </p>
             </div>
@@ -892,68 +889,68 @@ export default function Component() {
 
   if (gameState.gamePhase === "result") {
     const profile = getProfile(gameState.currentMoney)
-    const isSuccess = gameState.currentMoney >= 2500
+    const isSuccess = gameState.currentMoney >= 2000
 
     return (
-      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4 flex items-center">
-        <div className="max-w-4xl mx-auto w-full">
-          {/* Logo ITBA arriba a la izquierda */}
-          <div className="absolute top-4 left-4">
-            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+      <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-3 sm:p-4 lg:p-6 flex items-center">
+        <div className="max-w-xl sm:max-w-2xl lg:max-w-4xl xl:max-w-5xl mx-auto w-full">
+          {/* Logo ITBA */}
+          <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
+            <div className="bg-white p-2 sm:p-3 lg:p-4 rounded-lg shadow-md border border-blue-600">
               <img
                 src="/ITBA-logo.jpg"
                 alt="Logo ITBA"
-                className="h-16 object-contain"
-                style={{ maxWidth: 160 }}
+                className="h-8 sm:h-12 lg:h-16 object-contain"
+                style={{ maxWidth: "80px" }}
               />
             </div>
           </div>
           
-          <div className="text-center mb-6">
-            <h1 className="text-3xl font-bold text-slate-800 mb-2">
+          <div className="text-center mb-4 sm:mb-6 mt-16 sm:mt-20 lg:mt-8">
+            <h1 className="text-xl sm:text-2xl lg:text-3xl xl:text-4xl font-bold text-slate-800 mb-2">
               {isSuccess ? "🎉 ¡LA ROMPISTE!" : "📊 Resultado Final"}
             </h1>
           </div>
 
           <div className="bg-white shadow-2xl border-0 rounded-lg">
-            <div className="bg-gradient-to-r from-green-100 to-blue-100 pb-6 pt-6 px-6 rounded-t-lg">
-              <h2 className="text-center text-2xl flex items-center justify-center gap-3 font-bold">
-                Tu Resultado Final:
+            <div className="bg-gradient-to-r from-green-100 to-blue-100 pb-4 sm:pb-6 pt-4 sm:pt-6 px-4 sm:px-6 lg:px-8 rounded-t-lg">
+              <h2 className="text-center text-lg sm:text-xl lg:text-2xl xl:text-3xl flex items-center justify-center gap-2 sm:gap-3 font-bold flex-col sm:flex-row">
+                <span>Tu Resultado Final:</span>
                 <span className={`flex items-center gap-2 ${isSuccess ? "text-green-600" : "text-orange-600"}`}>
                   💰 ${gameState.currentMoney}
                 </span>
               </h2>
-              <p className="text-center text-base font-medium mt-3">{profile}</p>
+              <p className="text-center text-xs sm:text-sm lg:text-base xl:text-lg font-medium mt-3 px-2">{profile}</p>
             </div>
-            <div className="p-6">
-              <div className="mb-8">
-                <div className="flex justify-between text-base font-semibold mb-3">
+            <div className="p-4 sm:p-6 lg:p-8">
+              <div className="mb-6 sm:mb-8">
+                <div className="flex justify-between text-xs sm:text-sm lg:text-base font-semibold mb-3">
                   <span>$0</span>
-                  <span className="text-green-600">Meta: $2500</span>
+                  <span className="text-green-600">Meta: $2000</span>
                   <span>$4000+</span>
                 </div>
-                <div className="w-full bg-gray-200 rounded-full h-5">
+                <div className="w-full bg-gray-200 rounded-full h-4 sm:h-5">
                   <div 
-                    className="bg-green-600 h-5 rounded-full transition-all duration-500"
+                    className="bg-green-600 h-4 sm:h-5 rounded-full transition-all duration-500"
                     style={{ width: `${Math.min((gameState.currentMoney / 4000) * 100, 100)}%` }}
                   ></div>
                 </div>
               </div>
 
-              <div className="space-y-4 max-h-48 overflow-y-auto mb-8">
-                <h3 className="font-semibold text-lg text-center">📋 Tu Historia Emprendedora:</h3>
+              <div className="space-y-3 sm:space-y-4 max-h-40 sm:max-h-48 lg:max-h-60 overflow-y-auto mb-6 sm:mb-8">
+                <h3 className="font-semibold text-base sm:text-lg lg:text-xl text-center">📋 Tu Historia Emprendedora:</h3>
                 {gameState.decisions.map((decision, index) => (
-                  <div key={index} className="p-4 bg-slate-50 rounded-lg border">
-                    <div className="flex justify-between items-center mb-2">
-                      <div className="text-base font-medium">
+                  <div key={index} className="p-3 sm:p-4 bg-slate-50 rounded-lg border">
+                    <div className="flex justify-between items-center mb-2 flex-col sm:flex-row gap-2 sm:gap-0">
+                      <div className="text-xs sm:text-sm lg:text-base font-medium text-center sm:text-left">
                         {baseDecisions[index].icon} Decisión {index + 1}:{" "}
                         {decision.option.split(":")[1]?.trim() || decision.option}
                       </div>
-                      <span className={`text-sm px-2 py-1 rounded ${decision.result === "win" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
+                      <span className={`text-xs px-2 py-1 rounded ${decision.result === "win" ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"}`}>
                         {decision.result === "win" ? "✅ La pegaste" : "❌ No salió"}
                       </span>
                     </div>
-                    <div className="text-sm text-slate-600">
+                    <div className="text-xs sm:text-sm text-slate-600 text-center sm:text-left">
                       Invertiste: ${decision.invested}
                       {decision.result === "win"
                         ? ` → Ganaste: $${decision.gained}`
@@ -964,29 +961,29 @@ export default function Component() {
               </div>
 
               {/* Mensaje educativo ITBA */}
-              <div className="text-center p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl border border-blue-200 mb-8">
-                <h4 className="font-semibold text-lg mb-3">🎓 En el ITBA formamos emprendedores</h4>
-                <p className="text-sm text-slate-700 mb-3">
+              <div className="text-center p-4 sm:p-6 lg:p-8 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl border border-blue-200 mb-6 sm:mb-8">
+                <h4 className="font-semibold text-sm sm:text-base lg:text-lg xl:text-xl mb-3">🎓 En el ITBA formamos emprendedores</h4>
+                <p className="text-xs sm:text-sm lg:text-base text-slate-700 mb-3">
                   En el mundo de los negocios, siempre hay decisiones con distintos niveles de riesgo y recompensa. 
                   Un buen <strong>Lic. en Analítica Empresarial</strong> y <strong>Lic. en Negocios y Tecnología </strong> 
                   usa datos y gestiona con tecnología para entender el impacto de cada decisión.
                 </p>
-                <p className="text-sm text-slate-600 italic">
+                <p className="text-xs sm:text-sm text-slate-600 italic">
                   ¡No es magia, es analizar la data para tomar decisiones más inteligentes! 
                   En el ITBA te preparamos para eso.
                 </p>
               </div>
 
-              <div className="flex justify-center gap-4">
+              <div className="flex justify-center gap-3 sm:gap-4 flex-col sm:flex-row">
                 <button 
                   onClick={resetGame} 
-                  className="bg-green-600 hover:bg-green-700 text-white px-6 py-3 rounded flex items-center gap-2"
+                  className="bg-green-600 hover:bg-green-700 text-white px-4 sm:px-6 py-2 sm:py-3 rounded flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
                   🔄 Jugar de Nuevo
                 </button>
                 <button
                   onClick={() => setGameState((prev) => ({ ...prev, gamePhase: "leaderboard" }))}
-                  className="border border-slate-300 hover:bg-slate-50 px-6 py-3 rounded flex items-center gap-2"
+                  className="border border-slate-300 hover:bg-slate-50 px-4 sm:px-6 py-2 sm:py-3 rounded flex items-center justify-center gap-2 text-sm sm:text-base"
                 >
                   🏆 Ver Rankings
                 </button>
@@ -1001,38 +998,38 @@ export default function Component() {
   const currentDecisionData = baseDecisions[gameState.currentDecision]
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-3 flex items-center">
-      <div className="max-w-5xl mx-auto w-full">
-        {/* Logo ITBA arriba a la izquierda */}
-        <div className="absolute top-4 left-4">
-          <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+    <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-3 sm:p-4 lg:p-6 flex items-center">
+      <div className="max-w-xl sm:max-w-2xl lg:max-w-5xl xl:max-w-6xl mx-auto w-full">
+        {/* Logo ITBA */}
+        <div className="absolute top-2 left-2 sm:top-4 sm:left-4">
+          <div className="bg-white p-2 sm:p-3 lg:p-4 rounded-lg shadow-md border border-blue-600">
             <img
               src="/ITBA-logo.jpg"
               alt="Logo ITBA"
-              className="h-16 object-contain"
-              style={{ maxWidth: 160 }}
+              className="h-8 sm:h-12 lg:h-16 object-contain"
+              style={{ maxWidth: "80px" }}
             />
           </div>
         </div>
         
-        <div className="text-center mb-4">
-          <h1 className="text-xl font-bold text-slate-800 mb-2">
+        <div className="text-center mb-4 mt-16 sm:mt-20 lg:mt-8">
+          <h1 className="text-base sm:text-xl lg:text-2xl xl:text-3xl font-bold text-slate-800 mb-2">
             {currentDecisionData.icon} {currentDecisionData.title}
           </h1>
-          <div className="flex justify-center items-center gap-4 mb-3 flex-wrap">
-            <span className="border border-slate-300 text-sm px-3 py-1 rounded">
+          <div className="flex justify-center items-center gap-2 sm:gap-4 mb-3 flex-wrap">
+            <span className="border border-slate-300 text-xs sm:text-sm lg:text-base px-3 py-1 rounded">
               💰 ${gameState.currentMoney}
             </span>
-            <span className="border border-slate-300 text-sm px-3 py-1 rounded">
-              🎯 Meta: $2500
+            <span className="border border-slate-300 text-xs sm:text-sm lg:text-base px-3 py-1 rounded">
+              🎯 Meta: $2000
             </span>
           </div>
 
-          <div className="flex justify-center gap-2 mb-4">
+          <div className="flex justify-center gap-1 sm:gap-2 mb-4">
             {[0, 1, 2].map((step) => (
               <div
                 key={step}
-                className={`w-8 h-8 rounded-full flex items-center justify-center text-sm font-bold ${
+                className={`w-6 h-6 sm:w-8 sm:h-8 lg:w-10 lg:h-10 rounded-full flex items-center justify-center text-xs sm:text-sm lg:text-base font-bold ${
                   step < gameState.currentDecision
                     ? "bg-green-500 text-white"
                     : step === gameState.currentDecision
@@ -1047,34 +1044,33 @@ export default function Component() {
         </div>
 
         <div className="bg-white shadow-2xl border-0 rounded-lg">
-          <div className="bg-gradient-to-r from-slate-100 to-blue-100 py-4 px-4 rounded-t-lg">
-            <p className="text-center text-sm font-medium mb-3">
+          <div className="bg-gradient-to-r from-slate-100 to-blue-100 py-3 sm:py-4 lg:py-6 px-3 sm:px-4 lg:px-6 rounded-t-lg">
+            <p className="text-center text-xs sm:text-sm lg:text-base font-medium mb-3">
               {currentDecisionData.subtitle}
             </p>
-            <div className="bg-blue-50 p-3 rounded-lg border border-blue-200">
-              <p className="text-sm text-slate-700 text-center">{currentDecisionData.scenario}</p>
+            <div className="bg-blue-50 p-3 sm:p-4 rounded-lg border border-blue-200">
+              <p className="text-xs sm:text-sm lg:text-base text-slate-700 text-center">{currentDecisionData.scenario}</p>
             </div>
           </div>
-          <div className="p-4">
-            <div className="grid gap-3">
+          <div className="p-3 sm:p-4 lg:p-6">
+            <div className="grid gap-3 sm:gap-4 lg:grid-cols-1 xl:grid-cols-1">
               {shuffledOptions.map((option, index) => {
                 const canAfford = gameState.currentMoney >= option.investment
-                // Calcular rango de ganancias (150% a 300% del costo)
-                const minGain = Math.round(option.investment * 2.5) // 150% ganancia = 2.5x costo
-                const maxGain = Math.round(option.investment * 4) // 300% ganancia = 4x costo
+                const minGain = Math.round(option.investment * 2.5)
+                const maxGain = Math.round(option.investment * 4)
 
                 return (
                   <button
                     key={`${option.id}-${index}`}
-                    className="h-auto p-3 text-left border-2 border-slate-200 hover:border-blue-400 hover:bg-blue-50 disabled:opacity-50 transition-all rounded-lg bg-white"
+                    className="h-auto p-3 sm:p-4 lg:p-5 text-left border-2 border-slate-200 hover:border-blue-400 hover:bg-blue-50 disabled:opacity-50 transition-all rounded-lg bg-white"
                     onClick={() => makeDecision(index)}
                     disabled={!canAfford}
                   >
                     <div className="w-full">
-                      <div className="flex items-center justify-between mb-2">
+                      <div className="flex items-center justify-between mb-2 flex-col sm:flex-row gap-2 sm:gap-0">
                         <div className="flex items-center gap-2">
-                          <span className="text-lg">{option.icon}</span>
-                          <h3 className="font-bold text-sm">{option.title}</h3>
+                          <span className="text-base sm:text-lg lg:text-xl">{option.icon}</span>
+                          <h3 className="font-bold text-sm sm:text-base lg:text-lg">{option.title}</h3>
                         </div>
                         <div className="flex gap-2">
                           <span className={`text-xs px-2 py-1 rounded ${getRiskColor(option.riskLevel)}`}>
@@ -1083,11 +1079,11 @@ export default function Component() {
                         </div>
                       </div>
 
-                      <p className="text-xs text-slate-600 mb-2">{option.description}</p>
+                      <p className="text-xs sm:text-sm lg:text-base text-slate-600 mb-2 text-center sm:text-left">{option.description}</p>
 
-                      <div className="bg-slate-50 p-2 rounded border text-xs">
-                        <div className="flex justify-between items-center">
-                          <div className="flex gap-3">
+                      <div className="bg-slate-50 p-2 sm:p-3 rounded border text-xs sm:text-sm">
+                        <div className="flex justify-between items-center flex-col sm:flex-row gap-2 sm:gap-0">
+                          <div className="flex gap-2 sm:gap-3 flex-wrap justify-center sm:justify-start">
                             <span>💸 <strong className="text-red-600">${option.investment}</strong></span>
                             <span>🎯 <strong>{option.winChance}%</strong></span>
                           </div>
@@ -1097,7 +1093,7 @@ export default function Component() {
                         </div>
 
                         {!canAfford && (
-                          <div className="mt-1 text-red-600 text-xs font-medium">
+                          <div className="mt-1 text-red-600 text-xs font-medium text-center sm:text-left">
                             ⚠️ No te alcanza la plata
                           </div>
                         )}
