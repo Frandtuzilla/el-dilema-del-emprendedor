@@ -455,7 +455,7 @@ export default function Component() {
   }
 
   const getProfile = (amount: number): string => {
-    if (amount >= 3000)
+    if (amount >= 2500)
       return "🏆 ¡CRACK TOTAL! Sos el próximo Bill Gates del ITBA. Tomaste riesgos inteligentes y la rompiste."
     if (amount >= 2000)
       return "🚀 ¡Muy bien jugado! Tenés mente de emprendedor. Con un poco más de data y análisis vas a ser imparable."
@@ -522,17 +522,16 @@ export default function Component() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 via-green-50 to-yellow-50 p-3 flex items-center">
         <div className="max-w-4xl mx-auto w-full">
-          {/* Logo ITBA - Optimizado */}
-          <div className="text-center mb-6">
-            <div className="bg-white p-4 rounded-xl shadow-lg inline-block border-2 border-blue-600 hover:shadow-xl transition-shadow">
+          {/* Logo ITBA arriba a la izquierda */}
+          <div className="absolute top-4 left-4">
+            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
               <img
                 src="/ITBA-logo.jpg"
                 alt="Logo ITBA"
-                className="h-12 md:h-14 object-contain mx-auto"
-                style={{ maxWidth: 120 }}
+                className="h-16 object-contain"
+                style={{ maxWidth: 160 }}
               />
             </div>
-            <p className="text-xs text-slate-600 mt-2 font-medium">Instituto Tecnológico de Buenos Aires</p>
           </div>
 
           <div className="text-center mb-8">
@@ -572,15 +571,15 @@ export default function Component() {
                   <p className="text-xs font-medium text-slate-600 mb-1">Tu Plata Inicial</p>
                   <p className="text-2xl font-bold text-green-600">$1000</p>
                 </div>
-                <div className="p-4 bg-blue-50 rounded-xl border-2 border-blue-200 hover:border-blue-300 transition-colors">
-                  <span className="text-2xl mb-2 block">🎯</span>
-                  <p className="text-xs font-medium text-slate-600 mb-1">Meta a Alcanzar</p>
-                  <p className="text-2xl font-bold text-blue-600">$3000</p>
-                </div>
                 <div className="p-4 bg-yellow-50 rounded-xl border-2 border-yellow-200 hover:border-yellow-300 transition-colors">
                   <span className="text-2xl mb-2 block">⚽</span>
                   <p className="text-xs font-medium text-slate-600 mb-1">Decisiones Clave</p>
                   <p className="text-2xl font-bold text-yellow-600">3</p>
+                </div>
+                <div className="p-4 bg-blue-50 rounded-xl border-2 border-blue-200 hover:border-blue-300 transition-colors">
+                  <span className="text-2xl mb-2 block">🎯</span>
+                  <p className="text-xs font-medium text-slate-600 mb-1">Meta a Alcanzar</p>
+                  <p className="text-2xl font-bold text-blue-600">$2500</p>
                 </div>
               </div>
 
@@ -589,7 +588,7 @@ export default function Component() {
                 <div className="bg-slate-50 p-4 rounded-xl border border-slate-200">
                   <h3 className="text-base font-semibold text-slate-800 mb-2">🚀 El Desafío</h3>
                   <p className="text-sm mb-2 text-slate-700">
-                    3 decisiones estratégicas. $1000 para invertir. Meta: llegar a $3000 o más.
+                    $1000 para invertir. 3 decisiones estratégicas. Meta: llegar a $2500 o más.
                   </p>
                   <p className="text-xs text-slate-600">
                     Cada decisión tiene diferentes riesgos y recompensas. ¿Tenés lo que se necesita para ser emprendedor?
@@ -660,6 +659,18 @@ export default function Component() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-blue-50 to-green-50 p-3 flex items-center">
         <div className="max-w-3xl mx-auto w-full">
+          {/* Logo ITBA arriba a la izquierda */}
+          <div className="absolute top-4 left-4">
+            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+              <img
+                src="/ITBA-logo.jpg"
+                alt="Logo ITBA"
+                className="h-16 object-contain"
+                style={{ maxWidth: 160 }}
+              />
+            </div>
+          </div>
+          
           <div className="text-center mb-4">
             <h1 className="text-2xl font-bold text-slate-800 mb-2">❓ Cómo Jugar</h1>
           </div>
@@ -675,7 +686,7 @@ export default function Component() {
                   🎯 El Objetivo
                 </h3>
                 <p className="text-sm mb-2">
-                  Empezás con $1000 y tenés que llegar a $3000 o más. ¡Triplicar tu plata es el desafío!
+                  Empezás con $1000 y tenés que llegar a $2500 o más. ¡Más del doble de tu plata es el desafío!
                 </p>
               </div>
 
@@ -731,6 +742,18 @@ export default function Component() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-yellow-50 to-orange-50 p-3 flex items-center">
         <div className="max-w-4xl mx-auto w-full">
+          {/* Logo ITBA arriba a la izquierda */}
+          <div className="absolute top-4 left-4">
+            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+              <img
+                src="/ITBA-logo.jpg"
+                alt="Logo ITBA"
+                className="h-16 object-contain"
+                style={{ maxWidth: 160 }}
+              />
+            </div>
+          </div>
+          
           <div className="text-center mb-4">
             <h1 className="text-2xl font-bold text-slate-800 mb-1">🏆 Hall of Fame</h1>
             <p className="text-slate-600 text-sm">Los mejores emprendedores del ITBA</p>
@@ -773,11 +796,13 @@ export default function Component() {
                       }`}
                     >
                       <div className="flex items-center gap-3">
-                        {index === 0 && <span className="text-lg">👑</span>}
                         <span className={`text-sm px-2 py-1 rounded ${index < 3 ? "bg-blue-600 text-white" : "bg-slate-400 text-white"}`}>
                           #{index + 1}
                         </span>
                         <span className="font-semibold text-sm">{entry.name}</span>
+                        {index === 0 && <span className="text-lg">🥇</span>}
+                        {index === 1 && <span className="text-lg">🥈</span>}
+                        {index === 2 && <span className="text-lg">🥉</span>}
                       </div>
                       <div className="text-right">
                         <div className="font-bold text-green-600 text-base flex items-center gap-1">
@@ -818,6 +843,18 @@ export default function Component() {
     return (
       <div className="min-h-screen bg-gradient-to-br from-indigo-50 to-purple-50 p-4 flex items-center">
         <div className="max-w-4xl mx-auto w-full">
+          {/* Logo ITBA arriba a la izquierda */}
+          <div className="absolute top-4 left-4">
+            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+              <img
+                src="/ITBA-logo.jpg"
+                alt="Logo ITBA"
+                className="h-16 object-contain"
+                style={{ maxWidth: 160 }}
+              />
+            </div>
+          </div>
+          
           <div className="text-center mb-4">
             <h1 className="text-xl font-bold text-slate-800 mb-2">
               {currentDecisionData.icon} Decisión {gameState.currentDecision + 1}/3
@@ -855,11 +892,23 @@ export default function Component() {
 
   if (gameState.gamePhase === "result") {
     const profile = getProfile(gameState.currentMoney)
-    const isSuccess = gameState.currentMoney >= 3000
+    const isSuccess = gameState.currentMoney >= 2500
 
     return (
       <div className="min-h-screen bg-gradient-to-br from-green-50 to-blue-50 p-4 flex items-center">
         <div className="max-w-4xl mx-auto w-full">
+          {/* Logo ITBA arriba a la izquierda */}
+          <div className="absolute top-4 left-4">
+            <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+              <img
+                src="/ITBA-logo.jpg"
+                alt="Logo ITBA"
+                className="h-16 object-contain"
+                style={{ maxWidth: 160 }}
+              />
+            </div>
+          </div>
+          
           <div className="text-center mb-6">
             <h1 className="text-3xl font-bold text-slate-800 mb-2">
               {isSuccess ? "🎉 ¡LA ROMPISTE!" : "📊 Resultado Final"}
@@ -880,13 +929,13 @@ export default function Component() {
               <div className="mb-8">
                 <div className="flex justify-between text-base font-semibold mb-3">
                   <span>$0</span>
-                  <span className="text-green-600">Meta: $3000</span>
-                  <span>$5000+</span>
+                  <span className="text-green-600">Meta: $2500</span>
+                  <span>$4000+</span>
                 </div>
                 <div className="w-full bg-gray-200 rounded-full h-5">
                   <div 
                     className="bg-green-600 h-5 rounded-full transition-all duration-500"
-                    style={{ width: `${Math.min((gameState.currentMoney / 5000) * 100, 100)}%` }}
+                    style={{ width: `${Math.min((gameState.currentMoney / 4000) * 100, 100)}%` }}
                   ></div>
                 </div>
               </div>
@@ -914,20 +963,12 @@ export default function Component() {
                 ))}
               </div>
 
-              {/* Logo ITBA y mensaje educativo */}
+              {/* Mensaje educativo ITBA */}
               <div className="text-center p-6 bg-gradient-to-r from-blue-50 to-green-50 rounded-xl border border-blue-200 mb-8">
-                <div className="bg-white p-3 rounded-lg shadow-md inline-block border-2 border-blue-600 mb-4">
-                  <img
-                    src="/ITBA-logo.jpg"
-                    alt="Logo ITBA"
-                    className="h-12 object-contain mx-auto"
-                    style={{ maxWidth: 90 }}
-                  />
-                </div>
                 <h4 className="font-semibold text-lg mb-3">🎓 En el ITBA formamos emprendedores</h4>
                 <p className="text-sm text-slate-700 mb-3">
                   En el mundo de los negocios, siempre hay decisiones con distintos niveles de riesgo y recompensa. 
-                  Un buen <strong>Lic. en Analítica Empresarial</strong> y <strong>Lic. en Negocios y Tecnología</strong> 
+                  Un buen <strong>Lic. en Analítica Empresarial</strong> y <strong>Lic. en Negocios y Tecnología </strong> 
                   usa datos y gestiona con tecnología para entender el impacto de cada decisión.
                 </p>
                 <p className="text-sm text-slate-600 italic">
@@ -962,6 +1003,18 @@ export default function Component() {
   return (
     <div className="min-h-screen bg-gradient-to-br from-slate-50 to-blue-50 p-3 flex items-center">
       <div className="max-w-5xl mx-auto w-full">
+        {/* Logo ITBA arriba a la izquierda */}
+        <div className="absolute top-4 left-4">
+          <div className="bg-white p-4 rounded-lg shadow-md border border-blue-600">
+            <img
+              src="/ITBA-logo.jpg"
+              alt="Logo ITBA"
+              className="h-16 object-contain"
+              style={{ maxWidth: 160 }}
+            />
+          </div>
+        </div>
+        
         <div className="text-center mb-4">
           <h1 className="text-xl font-bold text-slate-800 mb-2">
             {currentDecisionData.icon} {currentDecisionData.title}
@@ -971,7 +1024,7 @@ export default function Component() {
               💰 ${gameState.currentMoney}
             </span>
             <span className="border border-slate-300 text-sm px-3 py-1 rounded">
-              🎯 Meta: $3000
+              🎯 Meta: $2500
             </span>
           </div>
 
